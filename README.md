@@ -1,3 +1,6 @@
+## STARTUPONE FIAP - 2SIS - GRUPO PETDEVICE
+Este repositório é parte do TCC que concorre no projeto StartupOne da FIAP - 2017, um projeto de conclusão de curso realizado pelas turmas de Sistemas de Informação da FIAP.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
