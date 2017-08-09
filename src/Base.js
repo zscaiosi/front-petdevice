@@ -10,6 +10,7 @@ class Base extends Component {
 			<Switch>
 				<Route exact path="/" component={Login} />
 				<Route path="/cadastrar" component={CadastroWraper} />
+				<Route path="/bem_vindo" render={ () => <h1>WELCOME!</h1> } />
 			</Switch>
 		);
 	}

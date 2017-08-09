@@ -40,8 +40,9 @@ class StepOneForm extends Component {
       },
       formDataDevice: {
         _id: '',
-        modelo: ''
-      }
+        modelo: 'beta'
+      },
+      isPosting: false
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -50,29 +51,38 @@ class StepOneForm extends Component {
   }
 //Faz o POST REQUEST para a API utilizando o módulo axios do npm, que é uma interface para HttpRequests assíncronos
   postClienteRequest(){
-    const instance = axios.create({
-      headers: {'Content-Type': 'application/json'}
-    });
+    // const instance = axios.create({
+    //   headers: {'Content-Type': 'application/json'}
+    // });
 
-    console.log('form data cliente',this.state.formDataClient, 'device', this.state.formDataDevice);
     let payloadClient = {
       ...this.state.formDataClient,
       device: this.state.formDataDevice._id
     }
 
-    console.log('payload =>=>', payloadClient);
-    
-    const request = instance.post(localApi.url+"/clientes/cadastrar", payloadClient);
+    const postClient = () => {
+      return axios.post(`${localApi.url}/clientes/cadastrar`, payloadClient);
+    }
 
-    return request.then( response => {
-      console.log('POST SUCCESS', response);
+    const postDevice = () => {
+      return axios.post(`${localApi.url}/devices/cadastrar`, {
+        "_id" : this.state.formDataDevice._id,
+        "modelo" : this.state.formDataDevice.modelo
+      });
+    }
+
+    console.log('payload =>=>', payloadClient, this.state.formDataDevice);
+    
+    const request = axios.all([ postClient(), postDevice() ]);
+
+    return request.then( axios.spread( (clientRes, deviceRes) => {
+      console.log("clientRes", clientRes, "deviceRes", deviceRes);
 
       this.props.onContinue(this.state);
 
-    }).catch( error => {
-      console.log('POST ERROR', error);
+    })).catch( axios.spread( (clientErr, deviceErr) => {
 
-    });
+    }));
   }
 
   handleInputChange(event){
@@ -111,7 +121,11 @@ class StepOneForm extends Component {
   handleSubmit(event){
     event.preventDefault();
 
-    this.postClienteRequest();
+    this.setState({
+      isPosting: true
+    }, () => {
+      this.postClienteRequest();      
+    })
   }
 
   render(){
@@ -124,7 +138,7 @@ class StepOneForm extends Component {
           <InputField inputType="password" name="pswd" value={this.state.formDataClient.pswd} maxLength="135" fieldName="Senha" onChange={event => this.handleInputChange(event)} />
           <InputField inputType="radio" name="sexo" radioOptions={["masculino", "feminino", "não binário"]} value={this.state.formDataClient.sexo} fieldName="Sexo" onChange={event => this.handleInputChange(event)} />
           <InputField inputType="text" name="cpf" value={this.state.formDataClient.cpf} maxLength="11" fieldName="CPF" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="dtNascimento" value={this.state.formDataClient.dtNascimento} maxLength="10" fieldName="Data de Nascimento" onChange={event => this.handleInputChange(event)} />
+          <InputField inputType="date" name="dtNascimento" value={this.state.formDataClient.dtNascimento} fieldName="Data de Nascimento" onChange={event => this.handleInputChange(event)} />
           <InputField inputType="text" name="logradouro" value={this.state.formDataClient.logradouro} fieldName="Logradouro" onChange={event => this.handleInputChange(event)} />
           <InputField inputType="number" name="numero" value={this.state.formDataClient.numero} fieldName="Número" onChange={event => this.handleInputChange(event)} />
           <InputField inputType="text" name="complemento" value={this.state.formDataClient.complemento} fieldName="Complemento" onChange={event => this.handleInputChange(event)} />

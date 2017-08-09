@@ -16,6 +16,25 @@ const FormDiv = styled.div`
   justify-content: center;
   flex-direction: column;
 `
+
+const HorariosDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+`
+
+const HorariosRow = styled.span`
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+
+  p{
+    margin: 0px;
+    cursor: pointer;
+    color: red;
+  }
+`
+
 class StepThreeForm extends Component {
   constructor(props){
     super(props);
@@ -23,16 +42,26 @@ class StepThreeForm extends Component {
     this.state = {
       _id: '',
       descricao: '',
-      frequencia_diaria: '',
+      frequencia_diaria: 1,
       data_inicio: '',
-      data_fim: false,
+      data_fim: '',
       qtde_racao: '',
-      horarios: [],
-      ativa: true
+      horarios: ["00:00:00"],
+      ativa: true,
+      device: ''
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    let id = String(new Date()).substr(16, 8)+this.props.device.substr(0, 5);
+
+    this.setState({
+      _id: id,
+      device: this.props.device
+    }, () => console.log(this.state))
   }
 
   //Faz o POST REQUEST para a API utilizando o módulo axios do npm, que é uma interface para HttpRequests assíncronos
@@ -55,33 +84,69 @@ class StepThreeForm extends Component {
       });
     }
 
-  handleInputChange(event){
+  handleInputChange(event, extra){
     let name = event.target.name;
     let value = event.target.value;
 
-    console.log('Changed '+name+' value ',value);
+    console.log('Changed '+name+' value ',value, typeof extra);
 
-    this.setState({[name]: value});
+    if( name === "horarios" ){
+      let currentHorarios = this.state.horarios;
+
+      currentHorarios.indexOf(value) === -1 && currentHorarios.length < this.state.frequencia_diaria ? currentHorarios.push(value) : null
+
+      console.log(currentHorarios)
+
+      this.setState({
+        horarios: currentHorarios
+      }, () => console.log(this.state));
+      
+    }else{
+      this.setState({
+        [name]: value
+      }, () => console.log("2.0", this.state));      
+    }
+    
   }
 
   handleSubmit(event){
     event.preventDefault();
-    this.setState({device: this.props.device}, () => {
-      this.postDietRequest();
-    })
+    this.postDietRequest();
   }
 
   render(){
     return(
-      <FormDiv >
-        <InputField inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="number" name="frequencia_diaria" value={this.state.frequencia_diaria} fieldName="Frequência Diária" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="tex" name="data_inicio" value={this.state.data_inicio} maxLength="10" fieldName="Data de Início" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="tex" name="data_fim" value={this.state.data_fim} maxLength="10" fieldName="Data de Término" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="number" name="qtde_racao" value={this.state.qtde_racao} fieldName="Porção por refeição (g)" onChange={event => this.handleInputChange(event)} />
+      <OutterDiv>
+        <FormDiv >
+          <InputField inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="number" min={1} name="frequencia_diaria" value={this.state.frequencia_diaria} fieldName="Frequência Diária" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="date" name="data_inicio" value={this.state.data_inicio} fieldName="Data Início" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="date" name="data_fim" value={this.state.data_fim} fieldName="Data Fim" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="select" name="horarios" selectData={["00:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "17:00:00" ]}  fieldName="Horários" onChange={event => this.handleInputChange(event)} />
+            <HorariosDiv>
+              { this.state.horarios.map( (horario, index) => {
+                return(
+                  <HorariosRow >
+                    <b> {horario} </b> <p onClick={(e) => {
+                      //Função de excluir
+                          let currentHorarios = this.state.horarios.filter( (filteredHorario) => {
+                            return filteredHorario !== horario
+                          });
 
-          <button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</button>
-      </FormDiv>
+                          console.log("currentHorarios", currentHorarios);
+
+                          this.setState({
+                            horarios: currentHorarios
+                          }, () => console.log(this.state));
+                      //---FIM DA FUNÇÃO----
+                    }} > x </p>
+                  </HorariosRow>
+                )
+              }) }
+            </HorariosDiv>
+            <button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</button>
+        </FormDiv>
+      </OutterDiv>
     );
   }
 
