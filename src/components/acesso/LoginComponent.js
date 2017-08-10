@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {postLoginRequest} from '../../actions/loginActions';
+import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const DivWrapper = styled.div`
   display: flex;
@@ -31,6 +34,15 @@ class Login extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if( this.props.isPostingLogin === true && nextProps.postLoginSuccess !== null ){
+      this.setState({
+        errorMessage: ''
+      });
+    }
   }
 
   handleInputChange(e){
@@ -42,7 +54,7 @@ class Login extends Component {
   }
 
   handleSubmit(){
-    console.log('POST REQUEST');
+    this.props.postLoginRequest({ username: this.state.login, password: this.state.password });
   }
 
   render(){
@@ -57,12 +69,20 @@ class Login extends Component {
             <label htmlFor='login' >Senha:</label>
             <input id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
           </Input>
-          <button type="submit">Entrar</button>
+          <button onClick={this.handleSubmit} type="submit">Entrar</button>
           <Link to="/cadastrar" > Cadastrar </Link>
         </form>
+        { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }
       </DivWrapper>
     );
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    isPostingLogin: state.login.isPostingLogin,
+    postLoginSuccess: state.login.postLoginSuccess
+  }
+}
+
+export default connect(mapStateToProps, {postLoginRequest})(Login);
