@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getDeviceRequest} from '../../actions/deviceActions';
-import Header from '../header/HeaderComponent';
+
+import {Link} from 'react-router-dom';
 
 class ClienteDashboard extends Component {
   constructor(props){
@@ -13,24 +14,26 @@ class ClienteDashboard extends Component {
   }
 
   componentDidMount(){
-
+    
+    console.log("localStorage", localStorage);
   }
 
   render(){
+    
     return(
       <div>
-        <Header />
         Infos do cliente:
         {
           this.props.user !== null ?
           Object.keys(this.props.user).map( (k, i) => {
             return(
               <div key={k+i}>
-                { this.props.user[k] }
+                { k === "device" ? <Link to="/home/pet" > { this.props.user.device } </Link> : this.props.user[k] }
               </div> 
             );
           }) : null
         }
+        <Link to="/home/pet">pet</Link>
       </div>
     );
   }
