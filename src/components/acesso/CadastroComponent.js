@@ -44,7 +44,7 @@ class CadastroWraper extends Component {
         device={this.state.jsonCliente.formDataDevice._id}
         />
       default:
-        return <Redirect to="/bem_vindo" />
+        return <Redirect to="/home/cliente" />
     }
   }
 

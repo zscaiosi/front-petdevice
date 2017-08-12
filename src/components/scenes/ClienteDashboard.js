@@ -24,12 +24,12 @@ class ClienteDashboard extends Component {
       <div>
         Infos do cliente:
         {
-          this.props.user !== null ?
-          Object.keys(this.props.user).map( (k, i) => {
+          this.props.postLoginSuccess !== null ?
+          Object.keys(this.props.postLoginSuccess.user).map( (k, i) => {
             return(
               <div key={k+i}>
-                { k === "device" ? <Link to="/home/pet" > { this.props.user.device } </Link> : this.props.user[k] }
-              </div> 
+                { k === "device" ? <Link to="/home/pet" > { this.props.postLoginSuccess.user.device } </Link> : this.props.postLoginSuccess.user[k] }
+              </div>
             );
           }) : null
         }
@@ -41,7 +41,7 @@ class ClienteDashboard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.login.postLoginSuccess !== null ? state.login.postLoginSuccess.user : state.login.postLoginSuccess,
+    postLoginSuccess: state.login.postLoginSuccess,
     isGettingDevice: state.device.isGettingDevice,
     getDeviceSuccess: state.device.getDeviceSuccess
   }

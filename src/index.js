@@ -7,22 +7,23 @@ import wholeState from './reducers/index';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import Header from './components/header/HeaderComponent';
+import { loadState, saveState } from './localStorage';
 
-const store = createStore(wholeState, 
+const persistingState = loadState();
+
+const store = createStore(wholeState, persistingState,
   composeWithDevTools( applyMiddleware(thunkMiddleware) )
 );
 
 store.subscribe( () => {
   console.log("getState", store.getState())
-  localStorage.setItem('login', JSON.stringify(store.getState().login.postLoginSuccess));
+  saveState(store.getState());
 });
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Route path="/" component={Header} />
         <Route path="/" component={Base} />   
       </div>
     </BrowserRouter>

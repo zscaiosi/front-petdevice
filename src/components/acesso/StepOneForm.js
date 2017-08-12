@@ -40,7 +40,8 @@ class StepOneForm extends Component {
       },
       formDataDevice: {
         _id: '',
-        modelo: 'beta'
+        modelo: 'beta',
+        cliente: ''
       },
       isPosting: false
     }
@@ -67,7 +68,8 @@ class StepOneForm extends Component {
     const postDevice = () => {
       return axios.post(`${localApi.url}/devices/cadastrar`, {
         "_id" : this.state.formDataDevice._id,
-        "modelo" : this.state.formDataDevice.modelo
+        "modelo" : this.state.formDataDevice.modelo,
+        "cliente": this.state.formDataClient._id
       });
     }
 
