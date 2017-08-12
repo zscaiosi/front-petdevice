@@ -101,6 +101,7 @@ module.exports = {
       // Make sure your source files are compiled, as they will not be processed in any way.
       new ModuleScopePlugin(paths.appSrc),
     ],
+    root: [ path.resolve("../src") ]
   },
   module: {
     strictExportPresence: true,
