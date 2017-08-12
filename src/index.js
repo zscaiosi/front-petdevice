@@ -16,7 +16,7 @@ const store = createStore(wholeState, persistingState,
 );
 
 store.subscribe( () => {
-  console.log("getState", store.getState())
+  console.log("getState", store.getState());
   saveState(store.getState());
 });
 

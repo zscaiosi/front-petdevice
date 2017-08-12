@@ -25,6 +25,7 @@ export const saveState = (state) => {
 export const clearState = () => {
   try{
     localStorage.clear();
+    document.location.reload();
   }catch(e){
 
   }

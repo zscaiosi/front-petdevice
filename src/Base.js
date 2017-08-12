@@ -14,7 +14,7 @@ class Base extends Component {
 		return (
 			<div>
 				{ localStorage.getItem("login") === null ? <Redirect to="/" /> : <Redirect to="/home/cliente" /> }
-				<Route path="/" component={Header} />
+				<Route path="/home" component={Header} />
 				{ /*Header SEMPRE estará presente*/ }
 				<Switch>	
 					<Route exact path="/" component={Login} />

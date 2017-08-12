@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ClienteDashboard from './ClienteDashboard';
+import PetDashboard from './PetDashboard';
 import { Switch, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -10,7 +11,7 @@ class Home extends Component {
         <h2>Olá {this.props.postLoginSuccess !== null ? this.props.postLoginSuccess.user.nome : "---"}!</h2>
         <Switch>
           <Route path="/home/cliente" component={ClienteDashboard} />
-          <Route path="/home/pet" render={ () => { return <div>bb----bb---</div>  } } />
+          <Route path="/home/pet" component={PetDashboard} />
         </Switch>
       </div>      
     );
