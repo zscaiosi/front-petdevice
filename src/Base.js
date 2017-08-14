@@ -10,10 +10,9 @@ import Home from './components/scenes/HomeScene';
 class Base extends Component {
 
 	render() {
-		
 		return (
 			<div>
-				{ localStorage.getItem("login") === null ? <Redirect to="/" /> : <Redirect to="/home/cliente" /> }
+				{ localStorage.getItem("login") === null ?  <Redirect to="/" /> : (JSON.parse(localStorage.getItem("login")).login.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> :  <Redirect to="/" />) }
 				<Route path="/home" component={Header} />
 				{ /*Header SEMPRE estará presente*/ }
 				<Switch>	

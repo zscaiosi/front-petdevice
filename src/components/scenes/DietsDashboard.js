@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { getDeviceRequest, getPetRequest, getDietRequest } from '../../actions/deviceActions';
+//import { getPetRequest, getDietRequest } from '../../actions/deviceActions';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,11 +8,13 @@ const DivInfos = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
+  background-color: rgba(230,230,250, 0.5);
 
   @media(min-width: 768px){
     flex-direction: row;
     justify-content: center;
     border: 0.5px solid rgba(230,230,250, 0.5);
+    margin-top: 30px;
   }
 `
 
@@ -25,7 +27,7 @@ const DivColumn = styled.div`
   }
 `
 
-const PetSection = styled.section`
+const DietSection = styled.section`
   display: flex;
   padding: 5px;
   font-size: 13px;
@@ -35,8 +37,8 @@ const PetSection = styled.section`
 
   @media(min-width: 768px){
     flex-direction: row;
-    width: 100%;
     justify-content: center;
+    font-size: 20px;
   }
 `
 
@@ -46,7 +48,12 @@ const ArticleRow = styled.article`
   margin: 10px;
 `
 
-class PetDashboard extends Component {
+const HorarioColumnDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+class DietDashboard extends Component {
   constructor(props){
     super(props);
 
@@ -63,45 +70,54 @@ class PetDashboard extends Component {
     
     return(
       <DivInfos id="infos-container">
-        <PetSection>
+        <DietSection>
           <DivColumn>
             <ArticleRow>
-              <b>Nome:</b>
+              <b>Descrição:</b>
             </ArticleRow>
             <ArticleRow>
-              <b>Raça:</b>
+              <b>Frequência Diária:</b>
             </ArticleRow>
             <ArticleRow>
-              <b>Porte:</b>
+              <b>Data Início:</b>
             </ArticleRow>
             <ArticleRow>
-              <b>Pedigree:</b>
+              <b>Data Fim:</b>
             </ArticleRow>
             <ArticleRow>
-              <b>Espécie:</b>
+              <b>Quantidade por porção:</b>
             </ArticleRow>
             <ArticleRow>
-              <b>Idade:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Device:</b>
-            </ArticleRow>                                                                                                     
+              <b>Horários:</b>
+            </ArticleRow>                                                                                                    
           </DivColumn>          
           <DivColumn>
           {
-            this.props.getPetSuccess !== null ?
-            Object.keys(this.props.getPetSuccess.data).map( (k, i) => {
-              if( i >= 1 && i < 8 ){
+            this.props.getDietSuccess !== null ?
+            Object.keys(this.props.getDietSuccess.data).map( (k, i) => {
+              if( i >= 1 && i < 6 ){
                 return(
                   <ArticleRow key={k+i}>
-                    { this.props.getPetSuccess.data[k] }
+                    { this.props.getDietSuccess.data[k] === "" ? "---" : this.props.getDietSuccess.data[k] }
                   </ArticleRow>
-                );                
+                );
+              }else if( i === 7 ){
+                return(
+                  <ArticleRow key={k+i}>
+                    <HorarioColumnDiv>
+                    { this.props.getDietSuccess.data["horarios"].map( (horario, index) => {
+                      return (        
+                        <b key={horario+index} >{horario}</b>
+                      );
+                    }) }
+                    </HorarioColumnDiv>
+                  </ArticleRow>
+                );
               }
             }) : null
           }
           </DivColumn>
-        </PetSection>
+        </DietSection>
       </DivInfos>
     );
   }
@@ -123,4 +139,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getDeviceRequest, getPetRequest, getDietRequest })(PetDashboard);
+export default connect(mapStateToProps, null)(DietDashboard);

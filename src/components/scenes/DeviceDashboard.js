@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { getDeviceRequest, getPetRequest, getDietRequest } from '../../actions/deviceActions';
+import { getDeviceRequest } from '../../actions/deviceActions';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,11 +8,13 @@ const DivInfos = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
+  background-color: rgba(230,230,250, 0.5);
 
   @media(min-width: 768px){
     flex-direction: row;
     justify-content: center;
     border: 0.5px solid rgba(230,230,250, 0.5);
+    margin-top: 30px;
   }
 `
 
@@ -25,7 +27,7 @@ const DivColumn = styled.div`
   }
 `
 
-const PetSection = styled.section`
+const DeviceSection = styled.section`
   display: flex;
   padding: 5px;
   font-size: 13px;
@@ -35,8 +37,8 @@ const PetSection = styled.section`
 
   @media(min-width: 768px){
     flex-direction: row;
-    width: 100%;
     justify-content: center;
+    font-size: 20px;
   }
 `
 
@@ -46,7 +48,13 @@ const ArticleRow = styled.article`
   margin: 10px;
 `
 
-class PetDashboard extends Component {
+const AtividadesColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+`
+
+class DeviceDashboard extends Component {
   constructor(props){
     super(props);
 
@@ -56,52 +64,38 @@ class PetDashboard extends Component {
   }
 
   componentDidMount(){
-    console.log("localStorage: ", localStorage);
+    this.props.getDeviceRequest(this.props.postLoginSuccess.user.device);
   }
 
   render(){
     
     return(
       <DivInfos id="infos-container">
-        <PetSection>
+        <DeviceSection>
           <DivColumn>
             <ArticleRow>
-              <b>Nome:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Raça:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Porte:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Pedigree:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Espécie:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Idade:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Device:</b>
-            </ArticleRow>                                                                                                     
+              <b>Atividades:</b>
+            </ArticleRow>                                                                                                   
           </DivColumn>          
           <DivColumn>
-          {
-            this.props.getPetSuccess !== null ?
-            Object.keys(this.props.getPetSuccess.data).map( (k, i) => {
-              if( i >= 1 && i < 8 ){
-                return(
-                  <ArticleRow key={k+i}>
-                    { this.props.getPetSuccess.data[k] }
-                  </ArticleRow>
-                );                
-              }
-            }) : null
-          }
+          
+            {
+              this.props.getDeviceSuccess !== null && this.props.getDeviceSuccess.data.atividades !== undefined ? 
+                this.props.getDeviceSuccess.data.atividades.map( (atividade, i) => {
+                  return(
+                    <ArticleRow key={i}>
+                      <AtividadesColumn  >
+                        <b>{atividade.horario}</b>
+                        <b>{atividade.porcao !== undefined ? atividade.porcao+"g" : "0g"}</b>
+                      </AtividadesColumn>
+                    </ArticleRow>
+                  );
+                })
+                : "Carregando..."
+            }            
+          
           </DivColumn>
-        </PetSection>
+        </DeviceSection>
       </DivInfos>
     );
   }
@@ -123,4 +117,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getDeviceRequest, getPetRequest, getDietRequest })(PetDashboard);
+export default connect(mapStateToProps, {getDeviceRequest})(DeviceDashboard);

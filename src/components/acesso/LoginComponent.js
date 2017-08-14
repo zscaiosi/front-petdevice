@@ -23,6 +23,22 @@ const Input = styled.div`
   padding: 15px;
 `
 
+const ActionsColumnSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+`
+
+const BadMessageArticle = styled.article`
+  flex-direction: row;
+  background-color: rgba(255, 90, 90, 0.3);
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+  color: red;
+
+`
+
 class Login extends Component {
   constructor(props){
     super(props);
@@ -43,7 +59,14 @@ class Login extends Component {
         errorMessage: ''
       });
     }
+
+    if( this.props.isPostingLogin === true && nextProps.postLoginError !== null ){
+      this.setState({
+        errorMessage: nextProps.postLoginError.response.data.response === "not found" ? "Credenciais inválidas!" : nextProps.postLoginError.response.data.response
+      });
+    }
   }
+
 
   handleInputChange(e){
     let name = e.target.name;
@@ -54,7 +77,17 @@ class Login extends Component {
   }
 
   handleSubmit(){
-    this.props.postLoginRequest({ username: this.state.login, password: this.state.password });
+    if( this.state.login !== "" && this.state.pswd !== "" ){
+      this.props.postLoginRequest({ username: this.state.login, pswd: this.state.pswd });
+
+      this.setState({
+        errorMessage: ""
+      })
+    }else{
+      this.setState({
+        errorMessage: "Preencha os dois campos!"
+      });
+    }
   }
 
   render(){
@@ -69,8 +102,13 @@ class Login extends Component {
             <label htmlFor='login' >Senha:</label>
             <input id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
           </Input>
-          <button onClick={this.handleSubmit} type="submit">Entrar</button>
-          <Link to="/cadastrar" > Cadastrar </Link>
+          <ActionsColumnSection>
+            <button onClick={this.handleSubmit} type="submit">Entrar</button>
+
+            <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
+      
+            {this.state.errorMessage !== "" ? <BadMessageArticle> {this.state.errorMessage} </BadMessageArticle> : null}
+          </ActionsColumnSection>
         </form>
         { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }
       </DivWrapper>
@@ -81,7 +119,8 @@ class Login extends Component {
 const mapStateToProps = (state) => {
   return {
     isPostingLogin: state.login.isPostingLogin,
-    postLoginSuccess: state.login.postLoginSuccess
+    postLoginSuccess: state.login.postLoginSuccess,
+    postLoginError: state.login.postLoginError
   }
 }
 
