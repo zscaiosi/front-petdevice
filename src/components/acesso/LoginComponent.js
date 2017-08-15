@@ -9,10 +9,41 @@ const DivWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
-  margin-top: 10%;
-  align-content: flex-start;
-  padding: 10px;
+  padding: 5px;
+  max-width: 350px;
+  background-color: rgba(90,95,190, 0.5);
+  border-radius: 30px;
+
+  label{
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+  }
+
+  button{
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(90,255,150, 0.9);
+    border-radius: 15px;
+    border: 0px;   
+  }
+
+  a{
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+  }
+
+  input{
+    border-radius: 10px;
+    font-size: 15px;
+    height: 20px;
+  }
+
+  @media(min-width: 768px){
+    height: 350px;
+    width: 450px;
+
+  }
 `
 
 const Input = styled.div`

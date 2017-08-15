@@ -11,7 +11,7 @@ class Base extends Component {
 
 	render() {
 		return (
-			<div>
+			<div id="base-container" >
 				{ localStorage.getItem("login") === null ?  <Redirect to="/" /> : (JSON.parse(localStorage.getItem("login")).login.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> :  <Redirect to="/" />) }
 				<Route path="/home" component={Header} />
 				{ /*Header SEMPRE estará presente*/ }
