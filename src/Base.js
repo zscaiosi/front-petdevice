@@ -13,13 +13,15 @@ class Base extends Component {
 		return (
 			<div id="base-container" >
 				{ localStorage.getItem("login") === null ?  <Redirect to="/" /> : (JSON.parse(localStorage.getItem("login")).login.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> :  <Redirect to="/" />) }
-				<Route path="/home" component={Header} />
-				{ /*Header SEMPRE estará presente*/ }
-				<Switch>	
-					<Route exact path="/" component={Login} />
-					<Route path="/cadastrar" component={CadastroWraper} />
-					<Route path="/home" component={Home} />
-				</Switch>
+				<section style={{flexDirection: 'column', display: 'flex', height: '100%', width: '100%'}} >
+					<Route path="/home" component={Header} />
+					{ /*Header SEMPRE estará presente*/ }
+					<Switch>	
+						<Route exact path="/" component={Login} />
+						<Route path="/cadastrar" component={CadastroWraper} />
+						<Route path="/home" component={Home} />
+					</Switch>
+				</section>
 			</div>
 		);
 	}

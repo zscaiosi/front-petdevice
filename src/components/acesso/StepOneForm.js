@@ -3,6 +3,7 @@ import axios from 'axios';
 import {localApi} from '../../config.json';
 import InputField from '../reusable/InputFieldComponent';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 //Styled components para evitar arquivos CSS
 const OutterDiv = styled.div`
   width: 100%;
@@ -15,6 +16,12 @@ const FormDiv = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+
+  a{
+    text-decoration: none;
+    color: white;
+    text-align: center;
+  }
 `
 
 class StepOneForm extends Component {
@@ -150,6 +157,7 @@ class StepOneForm extends Component {
           <InputField inputType="text" name="device" value={this.state.formDataDevice._id} maxLength="10" fieldName="Chave do Dispositivo" onChange={event => this.handleInputChange(event)} />
           
           <button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</button>
+          <Link to="/" >Voltar</Link>
           
         </FormDiv>
       </OutterDiv>

@@ -9,6 +9,10 @@ div{
   display: flex;
 }
 
+#base-container{
+  height: 100%;
+}
+
 @media(min-height: 568px){
   html{
     height: 550px;
@@ -82,6 +86,6 @@ div{
   div#base-container{
     display: flex;
     justify-content: center;
-    height: 450px;
+    height: 800px;
   }
 }

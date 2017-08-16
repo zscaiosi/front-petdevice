@@ -59,12 +59,50 @@ class DeviceDashboard extends Component {
     super(props);
 
     this.state = {
-
+      filterDate: "",
+      showedAct: ""
     }
+    this.filterByDate = this.filterByDate.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
   componentDidMount(){
     this.props.getDeviceRequest(this.props.postLoginSuccess.user.device);
+  }
+
+  filterByDate(range){
+    if( range !== "" ){
+
+      let obj = [{"data":"2017-08-10", "horario":"12:00:00"}, {"data":"2017-08-13", "horario":"17:00:00"}];
+      
+      let showedActitivities = this.props.getDeviceSuccess.data.atividades.filter( (activity, index) => {
+        return range === activity.data;
+      }).map( (a, i ) => {
+        console.log("log:",a);
+        return a;
+      });
+
+      return showedActitivities;              
+    }
+  }
+
+  handleFilterChange(e){
+    if( e.target.value.length === 10 ){
+      this.setState({
+        filterDate: e.target.value,
+        showedAct: this.filterByDate(e.target.value)
+      }, () => {
+      
+      });      
+    }
+  }
+
+  cleanFilter(){
+    console.log("-------clean");
+    this.setState({
+      filterDate: '',
+      showedAct: ''
+    });
   }
 
   render(){
@@ -76,11 +114,16 @@ class DeviceDashboard extends Component {
             <ArticleRow>
               <b>Atividades:</b>
             </ArticleRow>                                                                                                   
-          </DivColumn>          
+          </DivColumn>
+          <p onClick={ () => this.cleanFilter() } >Limpar</p>
           <DivColumn>
-          
+            <input type="date" value={this.state.filterDate} onChange={ e => {
+              console.log(e.target.value);
+              this.handleFilterChange(e);
+            } }/>
+            
             {
-              this.props.getDeviceSuccess !== null && this.props.getDeviceSuccess.data.atividades !== undefined ? 
+              this.state.showedAct === "" ? ( this.props.getDeviceSuccess !== null && this.props.getDeviceSuccess.data.atividades !== undefined ? 
                 this.props.getDeviceSuccess.data.atividades.map( (atividade, i) => {
                   return(
                     <ArticleRow key={i}>
@@ -90,8 +133,17 @@ class DeviceDashboard extends Component {
                       </AtividadesColumn>
                     </ArticleRow>
                   );
+                } )
+                : "Carregando...") : this.state.showedAct.map( (atividade, i) => {
+                  return(
+                    <ArticleRow key={i}>
+                      <AtividadesColumn  >
+                        <b>{atividade.horario}</b>
+                        <b>{atividade.porcao !== undefined ? atividade.porcao+"g" : "0g"}</b>
+                      </AtividadesColumn>
+                    </ArticleRow>
+                  );                  
                 })
-                : "Carregando..."
             }            
           
           </DivColumn>

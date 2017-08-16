@@ -5,6 +5,19 @@ import {postLoginRequest} from '../../actions/loginActions';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+const DivContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 130px;
+
+  @media(min-width: 768px){
+    margin-top: 200px;
+  }
+
+`
+
 const DivWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -57,6 +70,7 @@ const Input = styled.div`
 const ActionsColumnSection = styled.section`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin: 5px;
 `
 
@@ -123,26 +137,28 @@ class Login extends Component {
 
   render(){
     return(
-      <DivWrapper>
-        <form onSubmit={event => event.preventDefault()}>
-          <Input style={{order: '1'}}>
-            <label htmlFor='login' >Login:</label>
-            <input id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
-          </Input>
-          <Input style={{order: '2'}}>
-            <label htmlFor='login' >Senha:</label>
-            <input id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
-          </Input>
-          <ActionsColumnSection>
-            <button onClick={this.handleSubmit} type="submit">Entrar</button>
+      <DivContainer>
+        <DivWrapper>
+          <form onSubmit={event => event.preventDefault()}>
+            <Input style={{order: '1'}}>
+              <label htmlFor='login' >Login:</label>
+              <input id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
+            </Input>
+            <Input style={{order: '2'}}>
+              <label htmlFor='login' >Senha:</label>
+              <input id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
+            </Input>
+            <ActionsColumnSection>
+              <button onClick={this.handleSubmit} type="submit">Entrar</button>
 
-            <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
-      
-            {this.state.errorMessage !== "" ? <BadMessageArticle> {this.state.errorMessage} </BadMessageArticle> : null}
-          </ActionsColumnSection>
-        </form>
-        { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }
-      </DivWrapper>
+              <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
+        
+              {this.state.errorMessage !== "" ? <BadMessageArticle> {this.state.errorMessage} </BadMessageArticle> : null}
+            </ActionsColumnSection>
+          </form>
+          { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }
+        </DivWrapper>
+      </DivContainer>
     );
   }
 }

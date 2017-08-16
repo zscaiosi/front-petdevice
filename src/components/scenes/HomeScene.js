@@ -12,6 +12,13 @@ const ContainerDiv = styled.div`
   flex-direction: column;
 `
 
+const WelcomeContainer = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 20px;
+`
+
 const WelcomeSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -25,6 +32,14 @@ const WelcomeSection = styled.section`
   h3{
     margin: 10px 0px 0px 0px;
   }
+
+  @media(min-width: 768px){
+    max-width: 500px;
+  }
+`
+
+const UserInfoSection = styled.section`
+  display: flex;
 `
 
 class Home extends Component {
@@ -65,10 +80,15 @@ class Home extends Component {
   render(){
     return(
       <ContainerDiv>
-        <WelcomeSection>
-          <h2>Olá {this.props.postLoginSuccess !== null ? this.props.postLoginSuccess.user.nome : "---"}!</h2>
-          <h3> { this.showPhrase() } </h3>
-        </WelcomeSection>
+        <WelcomeContainer>
+          <WelcomeSection>
+            <h2>Olá {this.props.postLoginSuccess !== null ? this.props.postLoginSuccess.user.nome : "---"}!</h2>
+            <h3> { this.showPhrase() } </h3>
+          </WelcomeSection>
+          <UserInfoSection>
+            <p>Algumas infos aqui...</p>
+          </UserInfoSection>
+        </WelcomeContainer>
         <Switch>
           <Route path="/home/cliente" component={ClienteDashboard} />
           <Route path="/home/pet" component={PetDashboard} />

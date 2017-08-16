@@ -35,6 +35,7 @@ const PetSection = styled.section`
 
   @media(min-width: 768px){
     flex-direction: row;
+    font-size: 20px;
     width: 100%;
     justify-content: center;
   }
