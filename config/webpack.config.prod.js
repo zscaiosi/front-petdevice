@@ -100,6 +100,16 @@ module.exports = {
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
       new ModuleScopePlugin(paths.appSrc),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+        Popper: ['popper.js', 'default'],
+        // In case you imported plugins individually, you must also require them here:
+        Util: "exports-loader?Util!bootstrap/js/dist/util",
+        Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
+        ...
+      })      
     ]
   },
   module: {
