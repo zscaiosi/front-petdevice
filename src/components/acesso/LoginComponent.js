@@ -10,12 +10,11 @@ const DivContainer = styled.div`
   justify-content: center;
   flex-direction: row;
   width: 100%;
-  margin-top: 130px;
+  margin-top: 100px;
 
   @media(min-width: 768px){
-    margin-top: 200px;
+    margin-top: 150px;
   }
-
 `
 
 const DivWrapper = styled.div`
@@ -137,19 +136,19 @@ class Login extends Component {
 
   render(){
     return(
-      <DivContainer>
-        <DivWrapper>
+
+        <div>
           <form onSubmit={event => event.preventDefault()}>
-            <Input style={{order: '1'}}>
+            <div className="form-group">
               <label htmlFor='login' >Login:</label>
               <input id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
-            </Input>
-            <Input style={{order: '2'}}>
+            </div>
+            <div className="form-group">
               <label htmlFor='login' >Senha:</label>
               <input id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
-            </Input>
+            </div>
             <ActionsColumnSection>
-              <button onClick={this.handleSubmit} type="submit">Entrar</button>
+              <button class="btn btn-default" onClick={this.handleSubmit} type="submit">Entrar</button>
 
               <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
         
@@ -157,8 +156,8 @@ class Login extends Component {
             </ActionsColumnSection>
           </form>
           { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }
-        </DivWrapper>
-      </DivContainer>
+        </div>
+ 
     );
   }
 }
