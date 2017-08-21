@@ -141,7 +141,7 @@ class Login extends Component {
           <form onSubmit={event => event.preventDefault()}>
             <div className="form-group">
               <label htmlFor='login' >Login:</label>
-              <input style={{marginLeft:'5px'}} id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
+              <input id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
             </div>
             <div className="form-group">
               <label htmlFor='login' >Senha:</label>
