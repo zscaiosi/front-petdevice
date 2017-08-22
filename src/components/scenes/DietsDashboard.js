@@ -4,55 +4,6 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-const DivInfos = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  background-color: rgba(230,230,250, 0.5);
-
-  @media(min-width: 768px){
-    flex-direction: row;
-    justify-content: center;
-    border: 0.5px solid rgba(230,230,250, 0.5);
-    margin-top: 30px;
-  }
-`
-
-const DivColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  a{
-    text-decoration: none;
-    color: black;
-  }
-`
-
-const DietSection = styled.section`
-  display: flex;
-  padding: 5px;
-  font-size: 13px;
-  background-color: rgba(173,216,230, 0.5);
-  margin-left: 20px;
-  margin-right: 20px;
-
-  @media(min-width: 768px){
-    flex-direction: row;
-    justify-content: center;
-    font-size: 20px;
-  }
-`
-
-const ArticleRow = styled.article`
-  display: flex;
-  justify-content: flex-start;
-  margin: 10px;
-`
-
-const HorarioColumnDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
 class DietDashboard extends Component {
   constructor(props){
     super(props);
@@ -69,56 +20,57 @@ class DietDashboard extends Component {
   render(){
     
     return(
-      <DivInfos id="infos-container">
-        <DietSection>
-          <DivColumn>
-            <ArticleRow>
+      <div className="container">
+        <div className="row d-md-flex flex-md-row">
+          <div className="col-md-6 d-md-flex flex-md-column">
+            <div className="row flex-row badge badge-primary m-md-3">
               <b>Descrição:</b>
-            </ArticleRow>
-            <ArticleRow>
+            </div>
+            <div className="row flex-row badge badge-primary m-md-3 ">
               <b>Frequência Diária:</b>
-            </ArticleRow>
-            <ArticleRow>
+            </div>
+            <div className="row flex-row badge badge-primary m-md-3">
               <b>Data Início:</b>
-            </ArticleRow>
-            <ArticleRow>
+            </div>
+            <div className="row flex-row badge badge-primary m-md-3">
               <b>Data Fim:</b>
-            </ArticleRow>
-            <ArticleRow>
+            </div>
+            <div className="row flex-row badge badge-primary m-md-3">
               <b>Quantidade por porção:</b>
-            </ArticleRow>
-            <ArticleRow>
+            </div>
+            <div className="row flex-row badge badge-primary m-md-3">
               <b>Horários:</b>
-            </ArticleRow>                                                                                                    
-          </DivColumn>          
-          <DivColumn>
+            </div>                                                                                                    
+          </div>
+          <div className="col-md-6 d-md-flex flex-md-column">
           {
             this.props.getDietSuccess !== null ?
             Object.keys(this.props.getDietSuccess.data).map( (k, i) => {
               if( i >= 1 && i < 6 ){
                 return(
-                  <ArticleRow key={k+i}>
-                    { this.props.getDietSuccess.data[k] === "" ? "---" : this.props.getDietSuccess.data[k] }
-                  </ArticleRow>
+                  <div className="row flex-row badge badge-info m-md-3" key={k+i}>
+                    { this.props.getDietSuccess.data[k] === "" ? <b>"---"</b> : <b>{this.props.getDietSuccess.data[k]}</b> }
+                  </div>
                 );
               }else if( i === 7 ){
                 return(
-                  <ArticleRow key={k+i}>
-                    <HorarioColumnDiv>
+                  <span className="">
                     { this.props.getDietSuccess.data["horarios"].map( (horario, index) => {
                       return (        
-                        <b key={horario+index} >{horario}</b>
+                        <div className="row flex-row badge badge badge-info m-md-3" key={horario+index}>
+                          <b>{horario}</b>
+                        </div>
                       );
                     }) }
-                    </HorarioColumnDiv>
-                  </ArticleRow>
+                  </span>
                 );
               }
             }) : null
           }
-          </DivColumn>
-        </DietSection>
-      </DivInfos>
+          </div>          
+        </div>
+
+      </div>
     );
   }
 }

@@ -116,9 +116,10 @@ class StepThreeForm extends Component {
 
   render(){
     return(
-      <OutterDiv>
-        <FormDiv >
-          <InputField inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
+      <div className="container">
+        <div className="row" >
+          <div className="col-md-12">
+            <InputField inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="number" min={1} name="frequencia_diaria" value={this.state.frequencia_diaria} fieldName="Frequência Diária" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="date" name="data_inicio" value={this.state.data_inicio} fieldName="Data Início" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="date" name="data_fim" value={this.state.data_fim} fieldName="Data Fim" onChange={event => this.handleInputChange(event)} />
@@ -145,8 +146,9 @@ class StepThreeForm extends Component {
               }) }
             </HorariosDiv>
             <button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</button>
-        </FormDiv>
-      </OutterDiv>
+          </div>
+        </div>
+      </div>
     );
   }
 

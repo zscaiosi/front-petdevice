@@ -8,7 +8,7 @@ import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { loadState, saveState } from './localStorage';
-//import './style/index.css';
+import './style/index.css';
 import 'bootstrap';
 
 const persistingState = loadState();

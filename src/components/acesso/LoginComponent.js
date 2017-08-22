@@ -137,15 +137,15 @@ class Login extends Component {
   render(){
     return(
 
-        <div>
-          <form onSubmit={event => event.preventDefault()}>
+        <div className="d-flex flex-row justify-content-center mt-5" >
+          <form onSubmit={event => event.preventDefault()} className="mt-5">
             <div className="form-group">
               <label htmlFor='login' >Login:</label>
-              <input id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
+              <input className="form-control" id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
             </div>
             <div className="form-group">
               <label htmlFor='login' >Senha:</label>
-              <input id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
+              <input className="form-control" id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
             </div>
             <ActionsColumnSection>
               <button class="btn btn-default" onClick={this.handleSubmit} type="submit">Entrar</button>

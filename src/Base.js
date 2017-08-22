@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './components/acesso/LoginComponent';
 import CadastroWraper from './components/acesso/CadastroComponent';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Header from './components/header/HeaderComponent';
 import Home from './components/scenes/HomeScene';
@@ -10,9 +10,9 @@ import Home from './components/scenes/HomeScene';
 class Base extends Component {
 
 	render() {
-		return(
+		return (
 			<div className="container">
-				{ localStorage.getItem("login") === null ?  <Redirect to="/" /> : (JSON.parse(localStorage.getItem("login")).login.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> :  <Redirect to="/" />) }
+				{localStorage.getItem("login") === null ? <Redirect to="/" /> : (JSON.parse(localStorage.getItem("login")).login.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : <Redirect to="/" />)}
 				<div className="row">
 					<div className="col-lg-2"></div>
 					<div className="col-lg-8">
@@ -20,15 +20,15 @@ class Base extends Component {
 					</div>
 					<div className="col-lg-2"></div>
 				</div>
-				<div className="row space-top flex-center">
-					<Switch>	
+				<div className="d-flex flex-column justify-content-center">
+					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route path="/cadastrar" component={CadastroWraper} />
 						<Route path="/home" component={Home} />
-					</Switch>					
+					</Switch>
 				</div>
 			</div>
-				
+
 		)
 		// return (
 		// 	<div id="base-container" >
@@ -36,7 +36,7 @@ class Base extends Component {
 		// 		<section style={{flexDirection: 'column', display: 'flex', height: '100%', width: '100%'}} >
 		// 			<Route path="/home" component={Header} />
 		// 			{ /*Header SEMPRE estará presente*/ }
-	
+
 		// 		</section>
 		// 	</div>
 		// );
@@ -44,9 +44,9 @@ class Base extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    user: state.login.postLoginSuccess !== null ? state.login.postLoginSuccess.user : state.login.postLoginSuccess
-  }
+	return {
+		user: state.login.postLoginSuccess !== null ? state.login.postLoginSuccess.user : state.login.postLoginSuccess
+	}
 }
 
 export default connect(mapStateToProps, null)(Base);

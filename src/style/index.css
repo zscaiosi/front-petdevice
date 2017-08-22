@@ -1,8 +1,18 @@
-@media(min-width: 768px){
-  .space-top{
-    margin-top: 250px;
-  }
-  .flex-center{
-    justify-content: center;
-  }
+a{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none;
+}
+
+.client-color{
+  background-color: rgba(192,192,192, 0.1);
+}
+
+.nav-color{
+  background-color: rgba(222,184,135, 0.3);
+}
+
+b{
+  font-size: 20px;
 }

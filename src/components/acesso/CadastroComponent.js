@@ -50,7 +50,7 @@ class CadastroWraper extends Component {
 
   render(){
     return(
-      <div>
+      <div className="d-flex flex-row justify-content-center">
         {this.renderChildren()}
       </div>
     );
