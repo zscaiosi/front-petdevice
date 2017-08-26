@@ -6,6 +6,7 @@ import DeviceDashboard from './DeviceDashboard';
 import { Switch, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import UpdateForm from './UpdateForm';
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ const WelcomeContainer = styled.section`
   flex-direction: row;
   justify-content: space-around;
   margin-top: 20px;
+  padding: 10px;
 `
 
 const WelcomeSection = styled.section`
@@ -86,7 +88,7 @@ class Home extends Component {
             <h3> { this.showPhrase() } </h3>
           </WelcomeSection>
           <UserInfoSection>
-            <p>Algumas infos aqui...</p>
+            <p>Controle aqui seu device, suas informações e as informações do seu PET!</p>
           </UserInfoSection>
         </WelcomeContainer>
         <Switch>
@@ -94,6 +96,7 @@ class Home extends Component {
           <Route path="/home/pet" component={PetDashboard} />
           <Route path="/home/dieta" component={DietsDashboard} />
           <Route path="/home/device" component={DeviceDashboard} />
+          <Route path="/home/update/:entity" component={UpdateForm} />
         </Switch>
       </ContainerDiv>      
     );

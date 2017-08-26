@@ -1,114 +1,101 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { getDeviceRequest, getPetRequest, getDietRequest } from '../../actions/deviceActions';
-import {Link} from 'react-router-dom';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+  getDeviceRequest,
+  getPetRequest,
+  getDietRequest
+} from "../../actions/deviceActions";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-const DivInfos = styled.div`
+const MarginSpan = styled.span`
   display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-
-  @media(min-width: 768px){
-    flex-direction: row;
-    justify-content: center;
-    border: 0.5px solid rgba(230,230,250, 0.5);
-  }
-`
-
-const DivColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  a{
-    text-decoration: none;
-    color: black;
-  }
-`
-
-const PetSection = styled.section`
-  display: flex;
-  padding: 5px;
-  font-size: 13px;
-  background-color: rgba(173,216,230, 0.5);
-  margin-left: 20px;
-  margin-right: 20px;
-
-  @media(min-width: 768px){
-    flex-direction: row;
-    font-size: 20px;
-    width: 100%;
-    justify-content: center;
-  }
-`
-
-const ArticleRow = styled.article`
-  display: flex;
-  justify-content: flex-start;
-  margin: 10px;
+  margin-top: 35px;
 `
 
 class PetDashboard extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
-    this.state = {
-
-    }
+    this.state = {};
   }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log("localStorage: ", localStorage);
   }
 
-  render(){
-    
-    return(
-      <DivInfos id="infos-container">
-        <PetSection>
-          <DivColumn>
-            <ArticleRow>
-              <b>Nome:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Raça:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Porte:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Pedigree:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Espécie:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Idade:</b>
-            </ArticleRow>
-            <ArticleRow>
-              <b>Device:</b>
-            </ArticleRow>                                                                                                     
-          </DivColumn>          
-          <DivColumn>
-          {
-            this.props.getPetSuccess !== null ?
-            Object.keys(this.props.getPetSuccess.data).map( (k, i) => {
-              if( i >= 1 && i < 8 ){
-                return(
-                  <ArticleRow key={k+i}>
-                    { this.props.getPetSuccess.data[k] }
-                  </ArticleRow>
-                );                
-              }
-            }) : null
-          }
-          </DivColumn>
-        </PetSection>
-      </DivInfos>
+  render() {
+    return (
+      <div className="container">
+
+        <div className="row">
+          <MarginSpan>
+          <div className="col-md-12">
+            <div className="col-md-12">
+              <div className="panel panel-default">
+                <div className="panel-body">
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>Raça</th>
+                          <th>Porte</th>
+                          <th>Pedigree</th>
+                          <th>Espécie</th>
+                          <th>Idade</th>    
+                          <th>Device</th>                                                  
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="info">
+                          {
+                            this.props.getPetSuccess !== null
+                            ? Object.keys(
+                                this.props.getPetSuccess.data
+                              ).map((k, i) => {
+                                if (i >= 1 && i < 8) {
+                                  return (
+                                    <td key={k + i}>
+                                      {this.props.getPetSuccess.data[k]}
+                                    </td>
+                                  );
+                                }
+                              })
+                            : null
+                          }
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          </MarginSpan>          
+        </div>
+
+        <div className="row">
+          <div className="col-md-12">
+            <div className="col-md-6">
+              <div className="col-md-6">
+                <button type="button" className="btn btn-info">
+                  ALTERAR
+                </button>
+              </div>
+              <div className="col-md-6" />
+            </div>
+            <div className="col-md-6" />
+          </div>
+        </div>        
+
+      </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     postLoginSuccess: state.login.postLoginSuccess,
     isGettingDevice: state.device.isGettingDevice,
@@ -121,7 +108,11 @@ const mapStateToProps = (state) => {
     isGettingDiet: state.device.isGettingDiet,
     getDietSuccess: state.device.getDietSuccess,
     getDietError: state.device.getDietError
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, { getDeviceRequest, getPetRequest, getDietRequest })(PetDashboard);
+export default connect(mapStateToProps, {
+  getDeviceRequest,
+  getPetRequest,
+  getDietRequest
+})(PetDashboard);

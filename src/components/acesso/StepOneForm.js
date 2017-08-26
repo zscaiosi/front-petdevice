@@ -33,7 +33,7 @@ class StepOneForm extends Component {
         _id: '',
         nome: '',
         email:'',
-        pswd: '',
+        psw: '',
         sexo: 'não binário',
         cpf: '',
         dtNascimento: '',
@@ -145,7 +145,7 @@ class StepOneForm extends Component {
           <div className="col-md-12">
             <InputField inputType="text" name="nome" value={this.state.formDataClient.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="text" name="email" value={this.state.formDataClient.email} maxLength="75" fieldName="E-mail" onChange={event => this.handleInputChange(event)} />
-            <InputField inputType="password" name="pswd" value={this.state.formDataClient.pswd} maxLength="135" fieldName="Senha" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="password" name="psw" value={this.state.formDataClient.psw} maxLength="135" fieldName="Senha" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="radio" name="sexo" radioOptions={["masculino", "feminino", "não binário"]} value={this.state.formDataClient.sexo} fieldName="Sexo" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="text" name="cpf" value={this.state.formDataClient.cpf} maxLength="11" fieldName="CPF" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="date" name="dtNascimento" value={this.state.formDataClient.dtNascimento} fieldName="Data de Nascimento" onChange={event => this.handleInputChange(event)} />

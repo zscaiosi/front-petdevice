@@ -114,13 +114,13 @@ class DeviceDashboard extends Component {
 
             <div className="row">
               {/* PRIMEIRA COLUNA */}
-              <div className="col-md-6 d-md-flex flex-md-column">
+{/*               <div className="col-md-6 d-md-flex flex-md-column">
 
                 <div className="row d-md-flex flex-md-row justify-content-center">
                   <button className="btn btn-danger" style={{ maxWidth: '100px', cursor: 'pointer' }} type="button" onClick={() => this.cleanFilter()} >Limpar</button>
                 </div>
 
-              </div>
+              </div> */}
               {/* SEGUNDA COLUNA */}
               <div className="col-md-6 d-md-flex flex-md-column">
 
@@ -141,7 +141,7 @@ class DeviceDashboard extends Component {
                           </div>
                         );
                       })
-                      : "Carregando...") : this.state.showedAct.map((atividade, i) => {
+                      : ( this.props.isGettingDevice === false ? "Nenhuma atividade encontrada." : "Carregando..." ) ) : this.state.showedAct.map((atividade, i) => {
                         return (
                           <div className="row" key={i}>
                             <div className="col-md-12 d-md-flex flex-md-column" >
@@ -157,7 +157,7 @@ class DeviceDashboard extends Component {
               </div>
             </div>
 
-            <div className="row ">
+           {/*  <div className="row ">
               <div className="col-md-12 d-md-flex flex-md-row justify-content-center">
                 <label className="alert alert-success">Filtrar por data:</label>
                 <input type="date" value={this.state.filterDate} onChange={e => {
@@ -165,7 +165,7 @@ class DeviceDashboard extends Component {
                   this.handleFilterChange(e);
                 }} />                
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

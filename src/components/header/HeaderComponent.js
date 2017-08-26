@@ -11,7 +11,7 @@ class Header extends Component {
 
   handleLogut(){
     localStorage.clear();
-    document.location.reload();
+    document.location.pathname = "/";
   }
 
   render(){

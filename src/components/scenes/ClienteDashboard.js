@@ -103,7 +103,7 @@ class ClienteDashboard extends Component {
 					</div>
 					<div className="d-flex flex-column col-md-4 justify-content-center">
 						<div className="row flex-row justify-content-center" >
-							<button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} >Alterar</button>
+							<button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/clientes">Alterar</Link></button>
 						</div>			
 					</div>
 				</div>

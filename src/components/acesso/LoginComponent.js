@@ -106,7 +106,7 @@ class Login extends Component {
 
     if( this.props.isPostingLogin === true && nextProps.postLoginError !== null ){
       this.setState({
-        errorMessage: nextProps.postLoginError.response.data
+        errorMessage: nextProps.postLoginError.response.data.response
       });
     }
   }
@@ -148,7 +148,7 @@ class Login extends Component {
               <input className="form-control" id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
             </div>
             <ActionsColumnSection>
-              <button className="btn btn-default" onClick={this.handleSubmit} type="submit">Entrar</button>
+              <button className="btn btn-default" style={{ cursor: 'pointer' }} onClick={this.handleSubmit} type="submit">Entrar</button>
 
               <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
         

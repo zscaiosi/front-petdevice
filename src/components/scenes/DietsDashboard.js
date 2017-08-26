@@ -54,7 +54,7 @@ class DietDashboard extends Component {
                 );
               }else if( i === 7 ){
                 return(
-                  <span className="">
+                  <span className="" key={k+i}>
                     { this.props.getDietSuccess.data["horarios"].map( (horario, index) => {
                       return (        
                         <div className="row flex-row badge badge badge-info m-md-3" key={horario+index}>
@@ -67,8 +67,13 @@ class DietDashboard extends Component {
               }
             }) : null
           }
-          </div>          
+          </div>
+               
         </div>
+
+        <div className="row flex-row justify-content-center" >
+          <button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/clientes">Alterar</Link></button>
+        </div>          
 
       </div>
     );
