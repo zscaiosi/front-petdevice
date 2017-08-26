@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {localApi} from '../../config.json';
+import {localApi, awsApi} from '../../config.json';
 import InputField from '../reusable/InputFieldComponent';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
@@ -70,11 +70,11 @@ class StepOneForm extends Component {
     }
 
     const postClient = () => {
-      return axios.post(`${localApi.url}/clientes/cadastrar`, payloadClient);
+      return axios.post(`${awsApi.url}/clientes/cadastrar`, payloadClient);
     }
 
     const postDevice = () => {
-      return axios.post(`${localApi.url}/devices/cadastrar`, {
+      return axios.post(`${awsApi.url}/devices/cadastrar`, {
         "_id" : this.state.formDataDevice._id,
         "modelo" : this.state.formDataDevice.modelo,
         "cliente": this.state.formDataClient._id

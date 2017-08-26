@@ -16,7 +16,7 @@ class Header extends Component {
 
   render(){
     return(
-      <div class="container">
+      <div className="container">
         <div className="d-flex ">
           <div className="flex-row panel-heading" >
             <b className="badge badge-default"> <Link to="/home/pet" style={{ margin: '10px' }}>PETS</Link> </b>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {localApi} from '../../config.json';
+import {localApi, awsApi} from '../../config.json';
 import InputField from '../reusable/InputFieldComponent';
 import styled from 'styled-components';
 //Styled components para evitar arquivos CSS
@@ -54,7 +54,7 @@ class StepOneForm extends Component {
 
       console.log("payload", this.state);
 
-      const request = instance.post(localApi.url+"/pets/cadastrar", this.state);
+      const request = instance.post(awsApi.url+"/pets/cadastrar", this.state);
 
       return request.then( response => {
         console.log('POST SUCCESS', response);

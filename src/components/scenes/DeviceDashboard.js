@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { getDeviceRequest } from '../../actions/deviceActions';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const DivInfos = styled.div`
@@ -55,7 +55,7 @@ const AtividadesColumn = styled.div`
 `
 
 class DeviceDashboard extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -66,38 +66,38 @@ class DeviceDashboard extends Component {
     this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getDeviceRequest(this.props.postLoginSuccess.user.device);
   }
 
-  filterByDate(range){
-    if( range !== "" ){
+  filterByDate(range) {
+    if (range !== "") {
 
-      let obj = [{"data":"2017-08-10", "horario":"12:00:00"}, {"data":"2017-08-13", "horario":"17:00:00"}];
-      
-      let showedActitivities = this.props.getDeviceSuccess.data.atividades.filter( (activity, index) => {
+      //let obj = [{ "data": "2017-08-10", "horario": "12:00:00" }, { "data": "2017-08-13", "horario": "17:00:00" }];
+
+      let showedActitivities = this.props.getDeviceSuccess.data.atividades.filter((activity, index) => {
         return range === activity.data;
-      }).map( (a, i ) => {
-        console.log("log:",a);
+      }).map((a, i) => {
+        console.log("log:", a);
         return a;
       });
 
-      return showedActitivities;              
+      return showedActitivities;
     }
   }
 
-  handleFilterChange(e){
-    if( e.target.value.length === 10 ){
+  handleFilterChange(e) {
+    if (e.target.value.length === 10) {
       this.setState({
         filterDate: e.target.value,
         showedAct: this.filterByDate(e.target.value)
       }, () => {
-      
-      });      
+
+      });
     }
   }
 
-  cleanFilter(){
+  cleanFilter() {
     console.log("-------clean");
     this.setState({
       filterDate: '',
@@ -105,50 +105,70 @@ class DeviceDashboard extends Component {
     });
   }
 
-  render(){
-    
-    return(
-      <DivInfos id="infos-container">
-        <DeviceSection>
-          <DivColumn>
-            <ArticleRow>
-              <b>Atividades:</b>
-            </ArticleRow>                                                                                                   
-          </DivColumn>
-          <p onClick={ () => this.cleanFilter() } >Limpar</p>
-          <DivColumn>
-            <input type="date" value={this.state.filterDate} onChange={ e => {
-              console.log(e.target.value);
-              this.handleFilterChange(e);
-            } }/>
-            
-            {
-              this.state.showedAct === "" ? ( this.props.getDeviceSuccess !== null && this.props.getDeviceSuccess.data.atividades !== undefined ? 
-                this.props.getDeviceSuccess.data.atividades.map( (atividade, i) => {
-                  return(
-                    <ArticleRow key={i}>
-                      <AtividadesColumn  >
-                        <b>{atividade.horario}</b>
-                        <b>{atividade.porcao !== undefined ? atividade.porcao+"g" : "0g"}</b>
-                      </AtividadesColumn>
-                    </ArticleRow>
-                  );
-                } )
-                : "Carregando...") : this.state.showedAct.map( (atividade, i) => {
-                  return(
-                    <ArticleRow key={i}>
-                      <AtividadesColumn  >
-                        <b>{atividade.horario}</b>
-                        <b>{atividade.porcao !== undefined ? atividade.porcao+"g" : "0g"}</b>
-                      </AtividadesColumn>
-                    </ArticleRow>
-                  );                  
-                })
-            }            
-          
-          </DivColumn>
-        </DeviceSection>
-      </DivInfos>
+  render() {
+
+    return (
+      <div id="container">
+        <div className="row client-color d-md-flex flex-md-row mt-5">
+          <div className="col-md-12">
+
+            <div className="row">
+              {/* PRIMEIRA COLUNA */}
+              <div className="col-md-6 d-md-flex flex-md-column">
+
+                <div className="row d-md-flex flex-md-row justify-content-center">
+                  <button className="btn btn-danger" style={{ maxWidth: '100px', cursor: 'pointer' }} type="button" onClick={() => this.cleanFilter()} >Limpar</button>
+                </div>
+
+              </div>
+              {/* SEGUNDA COLUNA */}
+              <div className="col-md-6 d-md-flex flex-md-column">
+
+                <div className="row d-md-flex flex-md-row">
+                  <b className="alert alert-success">Atividades:</b>
+                </div>
+
+                <div className="row d-md-flex flex-md-column">
+                  {
+                    this.state.showedAct === "" ? (this.props.getDeviceSuccess !== null && this.props.getDeviceSuccess.data.atividades !== undefined ?
+                      this.props.getDeviceSuccess.data.atividades.map((atividade, i) => {
+                        return (
+                          <div className="row" key={i}>
+                            <div className="col-md-12 d-md-flex flex-md-column" >
+                              <b>{atividade.horario}</b>
+                              <b>{atividade.porcao !== undefined ? atividade.porcao + "g" : "0g"}</b>
+                            </div>
+                          </div>
+                        );
+                      })
+                      : "Carregando...") : this.state.showedAct.map((atividade, i) => {
+                        return (
+                          <div className="row" key={i}>
+                            <div className="col-md-12 d-md-flex flex-md-column" >
+                              <b>{atividade.horario}</b>
+                              <b>{atividade.porcao !== undefined ? atividade.porcao + "g" : "0g"}</b>
+                            </div>
+                          </div>
+                        );
+                      })
+                  }
+                </div>
+
+              </div>
+            </div>
+
+            <div className="row ">
+              <div className="col-md-12 d-md-flex flex-md-row justify-content-center">
+                <label className="alert alert-success">Filtrar por data:</label>
+                <input type="date" value={this.state.filterDate} onChange={e => {
+                  console.log(e.target.value);
+                  this.handleFilterChange(e);
+                }} />                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
@@ -169,4 +189,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getDeviceRequest})(DeviceDashboard);
+export default connect(mapStateToProps, { getDeviceRequest })(DeviceDashboard);
