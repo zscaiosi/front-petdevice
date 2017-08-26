@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {localApi} from '../config.json';
+import {localApi, awsApi} from '../config.json';
 //get user
 export const GET_USER = 'GET_USER';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
@@ -39,7 +39,7 @@ export const getUserRequest = (login, password) => {
     }
   });
 
-  const request = instance.get(`${localApi.url}/clientes/procurar?login=${login}&password=${password}`);
+  const request = instance.get(`${awsApi.url}/clientes/procurar?login=${login}&password=${password}`);
 
   return dispatch => {
     dispatch(getUser());
@@ -81,7 +81,7 @@ export const postLoginRequest = (payload) => {
     }    
   });
 
-  const request = instance.post(`${localApi.url}/clientes/login`, payload);
+  const request = instance.post(`${awsApi.url}/clientes/login`, payload);
 
   return dispatch => {
     dispatch(postLogin());

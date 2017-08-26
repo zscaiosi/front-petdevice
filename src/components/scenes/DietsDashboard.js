@@ -21,7 +21,7 @@ class DietDashboard extends Component {
     
     return(
       <div className="container">
-        <div className="row d-md-flex flex-md-row">
+        <div className="row client-color d-md-flex flex-md-row">
           <div className="col-md-6 d-md-flex flex-md-column">
             <div className="row flex-row badge badge-primary m-md-3">
               <b>Descrição:</b>

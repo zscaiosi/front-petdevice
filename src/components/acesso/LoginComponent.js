@@ -106,7 +106,7 @@ class Login extends Component {
 
     if( this.props.isPostingLogin === true && nextProps.postLoginError !== null ){
       this.setState({
-        errorMessage: nextProps.postLoginError.response.data.response === "not found" ? "Credenciais inválidas!" : nextProps.postLoginError.response.data.response
+        errorMessage: nextProps.postLoginError.response.data
       });
     }
   }
@@ -122,7 +122,7 @@ class Login extends Component {
 
   handleSubmit(){
     if( this.state.login !== "" && this.state.pswd !== "" ){
-      this.props.postLoginRequest({ username: this.state.login, pswd: this.state.pswd });
+      this.props.postLoginRequest({ username: this.state.login, psw: this.state.pswd });
 
       this.setState({
         errorMessage: ""
@@ -148,7 +148,7 @@ class Login extends Component {
               <input className="form-control" id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
             </div>
             <ActionsColumnSection>
-              <button class="btn btn-default" onClick={this.handleSubmit} type="submit">Entrar</button>
+              <button className="btn btn-default" onClick={this.handleSubmit} type="submit">Entrar</button>
 
               <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
         

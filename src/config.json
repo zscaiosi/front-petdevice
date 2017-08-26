@@ -4,7 +4,7 @@
     "port" : ":8581"
   },
   "awsApi" : {
-    "url" : "ec2-54-197-172-138.compute-1.amazonaws.com:8581/",
+    "url" : "http://54.197.172.138",
     "port" : ":8581"
   }
 }

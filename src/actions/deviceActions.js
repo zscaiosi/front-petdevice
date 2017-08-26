@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {localApi} from '../config.json';
+import {localApi, awsApi} from '../config.json';
 
 export const GET_DEVICE = 'GET_DEVICE';
 export const GET_DEVICE_SUCCESS = 'GET_DEVICE_SUCCESS';
@@ -41,7 +41,7 @@ export const getDeviceRequest = (device) => {
     }
   });
 
-  const request = instance.get(`${localApi.url}/devices/procurar?_id=${device}`);
+  const request = instance.get(`${awsApi.url}/devices/procurar?_id=${device}`);
 
   return dispatch => {
     dispatch(getDevice());
@@ -81,7 +81,7 @@ export const getPetRequest = (device) => {
     }
   });
 
-  const request = instance.get(`${localApi.url}/pets/procurar/deviceAssociado?device_id=${device}`);
+  const request = instance.get(`${awsApi.url}/pets/procurar/deviceAssociado?device_id=${device}`);
 
   return dispatch => {
     dispatch(getPet());
@@ -121,7 +121,7 @@ export const getDietRequest = (device) => {
     }
   });
 
-  const request = instance.get(`${localApi.url}/dietas/procurar?device_id=${device}`);
+  const request = instance.get(`${awsApi.url}/dietas/procurar?device_id=${device}`);
 
   return dispatch => {
     dispatch(getDiet());
