@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getDeviceRequest, getPetRequest, getDietRequest } from '../../actions/deviceActions';
+import { getUserRequest } from '../../actions/loginActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
 import paw from '../../style/paw-print-.svg';
-import bowl from '../../style/bowl.svg'
+import bowl from '../../style/bowl.svg';
 
 const NavSection = styled.section`
 	display: flex;
@@ -23,11 +24,12 @@ class ClienteDashboard extends Component {
 	}
 
 	componentDidMount() {
-		console.log("localStorage: ", localStorage);
+		//console.log("localStorage: ", localStorage);
 		//Só faz os requests caso ainda não tenha no state as informações
 		this.props.getPetSuccess === null && this.props.postLoginSuccess !== null ? this.props.getPetRequest(this.props.postLoginSuccess.user.device) : null;
 		this.props.getDietSuccess === null && this.props.postLoginSuccess !== null ? this.props.getDietRequest(this.props.postLoginSuccess.user.device) : null;
 		this.props.getDeviceSuccess === null && this.props.postLoginSuccess !== null ? this.props.getDeviceRequest(this.props.postLoginSuccess.user.device) : null;
+		this.props.getUserSuccess === null && this.props.postLoginSuccess !== null ? this.props.getUserRequest(this.props.postLoginSuccess.user._id) : null;
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -35,7 +37,6 @@ class ClienteDashboard extends Component {
 	}
 
 	render() {
-		console.log("-------", this.props.getPetSuccess);
 		return (
 			<div className="container">
 				<div className="row client-color rounded" style={{ margin: "20px" }}>
@@ -86,13 +87,12 @@ class ClienteDashboard extends Component {
 						<div className="d-flex flex-column ">
 
 							{
-								this.props.postLoginSuccess !== null ?
-									Object.keys(this.props.postLoginSuccess.user).map((k, i) => {
+								this.props.getUserSuccess !== null ?
+									Object.keys(this.props.getUserSuccess.data).map((k, i) => {
 										if (i >= 1 && i !== 3) {
-											console.log(i)
 											return (
 												<div className="flex-row badge badge-info mb-3" key={k + i} >
-													<b> {this.props.postLoginSuccess.user[k]} </b>
+													<b> {this.props.getUserSuccess.data[k]} </b>
 												</div>
 											);
 										}
@@ -146,8 +146,10 @@ const mapStateToProps = (state) => {
 		//Diet
 		isGettingDiet: state.device.isGettingDiet,
 		getDietSuccess: state.device.getDietSuccess,
-		getDietError: state.device.getDietError
+		getDietError: state.device.getDietError,
+		//User
+		getUserSuccess: state.login.getUserSuccess
 	}
 }
 
-export default connect(mapStateToProps, { getDeviceRequest, getPetRequest, getDietRequest })(ClienteDashboard);
+export default connect(mapStateToProps, { getDeviceRequest, getPetRequest, getDietRequest, getUserRequest })(ClienteDashboard);

@@ -32,14 +32,14 @@ const getUserError = (error) => {
   }
 }
 
-export const getUserRequest = (login, password) => {
+export const getUserRequest = (id) => {
   const instance = axios.create({
     headers: {
       "Content-Type" : "application/json"
     }
   });
 
-  const request = instance.get(`${awsApi.url}/clientes/procurar?login=${login}&password=${password}`);
+  const request = instance.get(`${awsApi.url}/clientes/procurar?_id=${id}`);
 
   return dispatch => {
     dispatch(getUser());
@@ -87,8 +87,10 @@ export const postLoginRequest = (payload) => {
     dispatch(postLogin());
 
     return request.then( (response) => {
+      console.log("POST LOGIN SUCCESS", response);
       dispatch(postLoginSuccess(response));
     }).catch( (error) => {
+      console.log("POST LOGIN ERR", error);
       dispatch(postLoginError(error));
     });
   }

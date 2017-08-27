@@ -6,6 +6,7 @@ import ClientForm from '../reusable/ClientFormComponent';
 import PetForm from '../reusable/PetFormComponent';
 import DietForm from '../reusable/DietFormComponent';
 import {connect} from 'react-redux';
+import {getUserRequest} from '../../actions/loginActions';
 
 class UpdateForm extends Component{
   constructor(props){
@@ -13,32 +14,31 @@ class UpdateForm extends Component{
 
     this.state = {
       clientPayload: {
-        _id: this.props.user._id,
-        nome: this.props.user.nome,
-        email:this.props.user.email,
-        psw: this.props.user.psw,
-        sexo: this.props.user.sexo,
-        cpf: this.props.user.cpf,
-        dtNascimento: this.props.user.dtNascimento,
-        logradouro: this.props.user.logradouro,
-        numero: this.props.user.numero,
-        complemento: this.props.user.complemento,
-        bairro: this.props.user.bairro,
-        cep: this.props.user.cep,
-        cidade: this.props.user.cidade,
-        estado: this.props.user.estado,
+        _id: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data._id : this.props.user._id,
+        nome: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.nome : this.props.user.nome,
+        email: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.email : this.props.user.email,
+        psw: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.psw : this.props.user.psw,
+        sexo: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.sexo : this.props.user.sexo,
+        dtNascimento: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.dtNascimento : this.props.user.dtNascimento,
+        logradouro: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.logradouro : this.props.user.logradouro,
+        numero: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.numero : this.props.user.numero,
+        complemento: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.complemento : this.props.user.complemento,
+        bairro: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.bairro : this.props.user.bairro,
+        cep: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.cep : this.props.user.cep,
+        cidade: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.cidade : this.props.user.cidade,
+        estado: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.estado : this.props.user.estado,
       },
       petPayload: {
-        _id: '',
-        nome: '',
-        raca: '',
-        porte: '',
-        pedigree: false,
-        especie: '',
-        idade: '',
+        _id: this.props.getPetSuccess._id,
+        nome: this.props.getPetSuccess.nome,
+        raca: this.props.getPetSuccess.raca,
+        porte: this.props.getPetSuccess.porte,
+        pedigree: this.props.getPetSuccess.pedigree,
+        especie: this.props.getPetSuccess.especie,
+        idade: this.props.getPetSuccess.idade,
       },
       dietPayload: {
-        _id: '',
+        _id: this.props.getDietSuccess._id,
         descricao: this.props.getDietSuccess.data.descricao,
         frequencia_diaria: this.props.getDietSuccess.data.frequencia_diaria,
         data_inicio: this.props.getDietSuccess.data.data_inicio,
@@ -47,10 +47,19 @@ class UpdateForm extends Component{
         horarios: this.props.getDietSuccess.data.horarios,
         ativa: this.props.getDietSuccess.data.ativa,
       },
-      updateSuccess: {}
+      updateSuccess: null
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState){
+
+    if( this.state.updateSuccess !== null && prevState.updateSuccess !== this.state.updateSuccess ){
+      this.props.getUserRequest(this.props.user._id);
+    }
+
   }
 
   putRequest(payload){
@@ -60,7 +69,7 @@ class UpdateForm extends Component{
       }
     });
 
-    const request = instance.put(`${awsApi.url}/${this.props.entity}/atualizar`, payload);
+    const request = instance.put(`${awsApi.url}/${this.props.match.params.entity}/atualizar`, payload);
 
     request.then( (response) => {
       this.setState({
@@ -68,14 +77,17 @@ class UpdateForm extends Component{
           ok: true,
           res: response
         }
-      }, () => console.log("Success update", this.state));
+      }, () => {
+        console.log("Success update", this.state);
+
+      });
     }).catch( (error) => {
       this.setState({
         updateSuccess: {
           ok: false,
           res: error
         }
-      });
+      }, () => console.log("Error updating", this.state));
     });
   }
 
@@ -83,7 +95,7 @@ class UpdateForm extends Component{
     let name = event.target.name;
     let value = event.target.value;
 
-    console.log('Changed '+name+' value ',value, typeof extra);
+    console.log('Changed '+name+' value ',value);
 
     if( name === "horarios" ){
       let currentHorarios = this.state.dietPayload.horarios;
@@ -110,14 +122,14 @@ class UpdateForm extends Component{
           ...this.state.petPayload,
           [name]: value
         }
-      });      
+      });
     }else if( this.props.match.params.entity === "dietas" ){
       this.setState({
         dietPayload: {
           ...this.state.dietPayload,
           [name]: value
         }
-      }, () => console.log("State---", this.state.dietPayload));      
+      });      
     }
     
   }
@@ -132,20 +144,34 @@ class UpdateForm extends Component{
     });
   }
 
-  handleSubmit(){
-    //this.putRequest();
+  handleSubmit(form){
+
+    switch (form) {
+      case "clientes":
+        this.putRequest(this.state.clientPayload);
+      break;
+      case "dietas":
+        this.putRequest(this.state.dietPayload);
+      break;
+      case "pets":
+        this.putRequest(this.state.petPayload);
+      break;
+      default:
+        return null;
+    }
+
   }
 
   renderChildren(){
     switch (this.props.match.params.entity) {
       case "dietas":
-        return <DietForm values={this.state.dietPayload} currentDiet={this.props.getDietSuccess} hasExcluded={ (h) => this.handleExclude(h)} hasChanged={ (e) => this.handleInputChange(e) } />
+        return <DietForm values={this.state.dietPayload} currentDiet={this.props.getDietSuccess} hasExcluded={ (h) => this.handleExclude(h)} hasChanged={ (e) => this.handleInputChange(e) } handleSubmit={(f) => this.handleSubmit(f)} />
         
       case "pets":
-        return <PetForm values={this.state.petPayload} />
+        return <PetForm values={this.state.petPayload} currentPet={this.props.getPetSuccess} hasChanged={ (e) => this.handleInputChange(e) } handleSubmit={(f) => this.handleSubmit(f)} />
 
       case "clientes":
-        return <ClientForm values={this.state.clientPayload} currentClient={this.props.user} hasChanged={ (e) => this.handleInputChange(e) } onSubmit={() => this.handleSubmit()} />
+        return <ClientForm values={this.state.clientPayload} currentClient={this.props.user} hasChanged={ (e) => this.handleInputChange(e) } handleSubmit={(f) => this.handleSubmit(f)} />
     
       default:
         return null;
@@ -157,15 +183,24 @@ class UpdateForm extends Component{
       <div className="container">
 
       <div className="row d-flex flex-sm-column">
-        <div className="col-sm-12">
-          <div className="col-sm-6">
+        <div className="col-sm-12 d-flex flex-sm-row justify-content-center">
+          {/* <div className="col-sm-3">
+
+          </div>           */}
+          <div className="col-sm-6 d-flex flex-sm-column">
             {
               this.renderChildren()
             }
           </div>
-          <div className="col-sm-6">
+          {/* <div className="col-sm-3">
 
-          </div>
+          </div> */}
+        </div>
+      </div>
+
+      <div className="row d-flex">
+        <div className="col-sm-12 d-flex flex-sm-row justify-content-center">
+         { this.state.updateSuccess !== null && this.state.updateSuccess.ok === true ? <div className="alert alert-success">Atualizado</div> : null }
         </div>
       </div>
 
@@ -177,8 +212,10 @@ class UpdateForm extends Component{
 const mapStateToProps = (state) => {
   return {
     getDietSuccess: state.device.getDietSuccess,
-    user: state.login.postLoginSuccess.user
+    user: state.login.postLoginSuccess.user,
+    getPetSuccess: state.device.getPetSuccess.data,
+    getUserSuccess: state.login.getUserSuccess
   }
 }
 
-export default connect(mapStateToProps, null)(UpdateForm);
+export default connect(mapStateToProps, {getUserRequest})(UpdateForm);

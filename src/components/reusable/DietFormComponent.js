@@ -46,7 +46,9 @@ const DietForm = (props) => {
           )
         }) }
       </HorariosDiv>
-      <button onClick={event => props.handleSubmit(event)} type="submit" name="submit-btn">Alterar</button> 
+      <div className="row d-flex flex-sm-row justify-content-center">
+        <button onClick={event => props.handleSubmit("dietas")} type="submit" name="submit-btn">Alterar</button> 
+      </div>
     </span>
   );
 }

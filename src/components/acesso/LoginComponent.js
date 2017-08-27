@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {postLoginRequest} from '../../actions/loginActions';
+import {postLoginRequest, getUserRequest} from '../../actions/loginActions';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -99,9 +99,11 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps){
     if( this.props.isPostingLogin === true && nextProps.postLoginSuccess !== null ){
+      console.log(nextProps.postLoginSuccess, "------------");
+      //console.log(nextProps.postLoginSuccess.user._id);
       this.setState({
         errorMessage: ''
-      });
+      }, () => this.props.getUserRequest(this.props.postLoginSuccess.user._id));
     }
 
     if( this.props.isPostingLogin === true && nextProps.postLoginError !== null ){
@@ -170,4 +172,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {postLoginRequest})(Login);
+export default connect(mapStateToProps, {postLoginRequest, getUserRequest})(Login);

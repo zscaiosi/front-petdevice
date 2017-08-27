@@ -30,7 +30,7 @@ export const login = (state = LOGIN_STATE, action) => {
       return {
         ...state,
         isGettingUser: false,
-        getUserSuccess: action.response,
+        getUserSuccess: action.response.data,
         getUserError: null  
       }
     case GET_USER_ERROR:
@@ -42,18 +42,21 @@ export const login = (state = LOGIN_STATE, action) => {
       }
     case POST_LOGIN:
       return {
+        ...state,
         isPostingLogin: true,
         postLoginSuccess: null,
         postLoginError: null        
       }
     case POST_LOGIN_SUCCESS:
       return {
+        ...state,
         isPostingLogin: false,
         postLoginSuccess: action.response.data,
         postLoginError: null        
       }
     case POST_LOGIN_ERROR:
       return {
+        ...state,
         isPostingLogin: false,
         postLoginSuccess: null,
         postLoginError: action.error        

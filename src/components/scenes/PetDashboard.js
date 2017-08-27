@@ -80,9 +80,7 @@ class PetDashboard extends Component {
           <div className="col-md-12">
             <div className="col-md-6">
               <div className="col-md-6">
-                <button type="button" className="btn btn-info">
-                  ALTERAR
-                </button>
+                <button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/pets">Alterar</Link></button>
               </div>
               <div className="col-md-6" />
             </div>
