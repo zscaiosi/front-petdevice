@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {localApi} from '../../config.json';
+import {localApi, awsApi} from '../../config.json';
 import InputField from '../reusable/InputFieldComponent';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 //Styled components para evitar arquivos CSS
 const OutterDiv = styled.div`
   width: 100%;
@@ -15,6 +16,12 @@ const FormDiv = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+
+  a{
+    text-decoration: none;
+    color: white;
+    text-align: center;
+  }
 `
 
 class StepOneForm extends Component {
@@ -26,7 +33,7 @@ class StepOneForm extends Component {
         _id: '',
         nome: '',
         email:'',
-        pswd: '',
+        psw: '',
         sexo: 'não binário',
         cpf: '',
         dtNascimento: '',
@@ -35,12 +42,14 @@ class StepOneForm extends Component {
         complemento: '',
         bairro: '',
         cep: '',
+        cidade: '',
         estado: 'SP',
         device: ''
       },
       formDataDevice: {
         _id: '',
-        modelo: 'beta'
+        modelo: 'beta',
+        cliente: ''
       },
       isPosting: false
     }
@@ -61,13 +70,14 @@ class StepOneForm extends Component {
     }
 
     const postClient = () => {
-      return axios.post(`${localApi.url}/clientes/cadastrar`, payloadClient);
+      return axios.post(`${awsApi.url}/clientes/cadastrar`, payloadClient);
     }
 
     const postDevice = () => {
-      return axios.post(`${localApi.url}/devices/cadastrar`, {
+      return axios.post(`${awsApi.url}/devices/cadastrar`, {
         "_id" : this.state.formDataDevice._id,
-        "modelo" : this.state.formDataDevice.modelo
+        "modelo" : this.state.formDataDevice.modelo,
+        "cliente": this.state.formDataClient._id
       });
     }
 
@@ -130,27 +140,29 @@ class StepOneForm extends Component {
 
   render(){
     return(
-      <OutterDiv>
-        <FormDiv >
-          
-          <InputField inputType="text" name="nome" value={this.state.formDataClient.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="email" value={this.state.formDataClient.email} maxLength="75" fieldName="E-mail" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="password" name="pswd" value={this.state.formDataClient.pswd} maxLength="135" fieldName="Senha" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="radio" name="sexo" radioOptions={["masculino", "feminino", "não binário"]} value={this.state.formDataClient.sexo} fieldName="Sexo" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="cpf" value={this.state.formDataClient.cpf} maxLength="11" fieldName="CPF" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="date" name="dtNascimento" value={this.state.formDataClient.dtNascimento} fieldName="Data de Nascimento" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="logradouro" value={this.state.formDataClient.logradouro} fieldName="Logradouro" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="number" name="numero" value={this.state.formDataClient.numero} fieldName="Número" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="complemento" value={this.state.formDataClient.complemento} fieldName="Complemento" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="bairro" value={this.state.formDataClient.bairro} maxLength="75" fieldName="Bairro" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="cep" value={this.state.formDataClient.cep} maxLength="10" fieldName="Cep" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="select" name="estado" value={this.state.formDataClient.estado} selectData={["São Paulo", "Rio de Janeiro"]} fieldName="Estado" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="device" value={this.state.formDataDevice._id} maxLength="10" fieldName="Chave do Dispositivo" onChange={event => this.handleInputChange(event)} />
-          
-          <button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</button>
-          
-        </FormDiv>
-      </OutterDiv>
+      <div className="panel panel-default col-md-8">
+        <div className="row" >
+          <div className="col-md-12">
+            <InputField inputType="text" name="nome" value={this.state.formDataClient.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="text" name="email" value={this.state.formDataClient.email} maxLength="75" fieldName="E-mail" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="password" name="psw" value={this.state.formDataClient.psw} maxLength="135" fieldName="Senha" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="radio" name="sexo" radioOptions={["masculino", "feminino", "não binário"]} value={this.state.formDataClient.sexo} fieldName="Sexo" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="text" name="cpf" value={this.state.formDataClient.cpf} maxLength="11" fieldName="CPF" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="date" name="dtNascimento" value={this.state.formDataClient.dtNascimento} fieldName="Data de Nascimento" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="text" name="logradouro" value={this.state.formDataClient.logradouro} fieldName="Logradouro" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="number" name="numero" value={this.state.formDataClient.numero} fieldName="Número" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="text" name="complemento" value={this.state.formDataClient.complemento} fieldName="Complemento" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="text" name="bairro" value={this.state.formDataClient.bairro} maxLength="75" fieldName="Bairro" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="text" name="cep" value={this.state.formDataClient.cep} maxLength="10" fieldName="Cep" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="text" name="cidade" value={this.state.formDataClient.cidade} maxLength="35" fieldName="Cidade" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="select" name="estado" value={this.state.formDataClient.estado} selectData={["São Paulo", "Rio de Janeiro"]} fieldName="Estado" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="text" name="device" value={this.state.formDataDevice._id} maxLength="10" fieldName="Chave do Dispositivo" onChange={event => this.handleInputChange(event)} />
+            
+            <button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</button>
+            <Link to="/" >Voltar</Link>
+          </div>
+        </div>
+      </div>
     );
   }
 //

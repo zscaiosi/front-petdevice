@@ -65,7 +65,7 @@ class InputField extends Component {
 						return (
 							<span key={index}>
 								<label htmlFor={option} > {option} </label>
-								<input type="radio" id={option} name={this.props.name} value={option} onChange={this.props.onChange} />
+								<input type="radio" id={option} name={this.props.name} value={option} onClick={this.props.onChange} />
 							</span>
 						);
 					})}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {api} from '../config.json';
+import {awsApi} from '../config.json';
 
 export const POST_CLIENTE = 'POST_CLIENTE';
 export const POST_CLIENTE_SUCCESS = 'POST_CLIENTE_SUCCESS';
@@ -34,7 +34,7 @@ export const postClienteRequest = (payload) => {
       'Content-Type': 'application/x-www-form-urlencoded'
   });
 
-  const request = instance.post(api.url, payload);
+  const request = instance.post(awsApi.url, payload);
 
   return dispatch => {
     dispatch(postCliente());
@@ -69,11 +69,13 @@ const getClienteError = (error) => {
   }
 }
 
-export const getClienteRequest = (params) => {
+export const getClienteRequest = (id) => {
   const instance = axios.create({
     headers: {
       'Content-Type':'application/json'
     }
   });
+
+  const request = instance.get(`${awsApi.url}/clientes/procurar?_id=${id}`);
   
 }
