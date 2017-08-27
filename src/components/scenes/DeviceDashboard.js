@@ -190,18 +190,7 @@ class DeviceDashboard extends Component {
         </div>
 
         <div className="row flex-row justify-content-center">
-          <button
-            className="btn btn-danger"
-            type="button"
-            style={{ cursor: "pointer" }}
-          >
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              to="/home/update/dietas"
-            >
-              Alterar
-            </Link>
-          </button>
+
         </div>
       </div>
     );

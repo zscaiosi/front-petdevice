@@ -25,7 +25,7 @@ store.subscribe( () => {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-    <div className="container">
+    <div className="container container-index">
         <Route path="/" component={Base} />
     </div>         
     </BrowserRouter>

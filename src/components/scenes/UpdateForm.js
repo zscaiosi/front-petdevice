@@ -38,7 +38,7 @@ class UpdateForm extends Component{
         idade: this.props.getPetSuccess.idade,
       },
       dietPayload: {
-        _id: this.props.getDietSuccess._id,
+        _id: this.props.getDietSuccess.data._id,
         descricao: this.props.getDietSuccess.data.descricao,
         frequencia_diaria: this.props.getDietSuccess.data.frequencia_diaria,
         data_inicio: this.props.getDietSuccess.data.data_inicio,
@@ -151,6 +151,7 @@ class UpdateForm extends Component{
         this.putRequest(this.state.clientPayload);
       break;
       case "dietas":
+        console.log("payload", this.state.dietPayload)
         this.putRequest(this.state.dietPayload);
       break;
       case "pets":

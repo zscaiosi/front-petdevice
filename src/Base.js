@@ -20,7 +20,7 @@ class Base extends Component {
 					</div>
 					<div className="col-lg-2"></div>
 				</div>
-				<div className="d-flex flex-column justify-content-center">
+				<div className="row d-flex flex-column justify-content-center">
 					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route path="/cadastrar" component={CadastroWraper} />
