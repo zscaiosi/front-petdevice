@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {localApi} from '../../config.json';
+import {localApi, awsApi} from '../../config.json';
 import InputField from '../reusable/InputFieldComponent';
 import styled from 'styled-components';
 //Styled components para evitar arquivos CSS
@@ -54,7 +54,7 @@ class StepOneForm extends Component {
 
       console.log("payload", this.state);
 
-      const request = instance.post(localApi.url+"/pets/cadastrar", this.state);
+      const request = instance.post(awsApi.url+"/pets/cadastrar", this.state);
 
       return request.then( response => {
         console.log('POST SUCCESS', response);
@@ -85,9 +85,10 @@ class StepOneForm extends Component {
 
   render(){
     return(
-      <OutterDiv>
-        <FormDiv >
-          <InputField inputType="text" name="nome" value={this.state.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
+      <div className="panel panel-default col-md-8">
+        <div className="row" >
+          <div className="col-md-12">
+            <InputField inputType="text" name="nome" value={this.state.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="text" name="raca" value={this.state.raca} maxLength="75" fieldName="Raça" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="number" name="idade" value={this.state.idade} maxLength="2" fieldName="Idade" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="radio" name="pedigree" radioOptions={["sim", "não"]} value={this.state.pedigree} fieldName="Pedigree" onChange={event => this.handleInputChange(event)} />
@@ -95,8 +96,9 @@ class StepOneForm extends Component {
             <InputField inputType="radio" name="especie" radioOptions={["cão", "gato"]} value={this.state.especie} fieldName="Especie" onChange={event => this.handleInputChange(event)} />
             
             <button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</button>
-        </FormDiv>
-      </OutterDiv>
+          </div>
+        </div>
+      </div>
     );
   }
 

@@ -44,13 +44,13 @@ class CadastroWraper extends Component {
         device={this.state.jsonCliente.formDataDevice._id}
         />
       default:
-        return <Redirect to="/bem_vindo" />
+        return <Redirect to="/" />
     }
   }
 
   render(){
     return(
-      <div>
+      <div className="d-flex flex-row justify-content-center">
         {this.renderChildren()}
       </div>
     );
