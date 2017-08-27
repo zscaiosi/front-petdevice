@@ -16,3 +16,23 @@ a:hover{
 b{
   font-size: 20px;
 }
+
+div.container-index{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.panel-header-grey{
+  background-color: rgba(240,240,240,0.5);
+}
+
+@media(min-width: 768px){
+  div.container-index{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 1200px;
+  } 
+}
