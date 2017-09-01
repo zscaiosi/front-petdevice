@@ -5,14 +5,7 @@ import { getUserRequest } from '../../actions/loginActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
-import paw from '../../style/paw-print-.svg';
-import bowl from '../../style/bowl.svg';
-
-const NavSection = styled.section`
-	display: flex;
-	flex-direction: row;
-
-`
+import { Row, Col, Panel, Button } from 'react-bootstrap';
 
 class ClienteDashboard extends Component {
 	constructor(props) {
@@ -38,98 +31,105 @@ class ClienteDashboard extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				<div className="row client-color rounded" style={{ margin: "20px" }}>
-					<div className="d-flex flex-row col-md-4 justify-content-center">
-						<div className="d-flex flex-column ">
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Nome:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>E-mail:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Sexo:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>CPF:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Nascimento:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Logradouro:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Número:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Complemento:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Bairro:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>CEP:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Cidade:</b>
-							</div>							
-							<div className="flex-row badge badge-primary mb-3">
-								<b>Estado:</b>
-							</div>
-							<div className="flex-row badge badge-primary mb-3">
-								<b><Link to="/home/device" style={{ color: 'white' }} >Device:</Link></b>
-							</div>
-						</div>
-					</div>
-					<div className="d-flex flex-row col-md-4 justify-content-center">
-						<div className="d-flex flex-column ">
+			<Col md={12}>
+				<Row >
+					<Panel header="Informações" bsClass="panel" bsStyle="primary">
+						<Row>
+							<span className=" centered-span-row col-md-6" >
+								<Col md={6}>
+									<Row>
+										<b>Nome:</b>
+									</Row>
+									<Row>
+										<b>E-mail:</b>
+									</Row>
+									<Row>
+										<b>Sexo:</b>
+									</Row>
+									<Row>
+										<b>CPF:</b>
+									</Row>
+									<Row>
+										<b>Nascimento:</b>
+									</Row>
+									<Row>
+										<b>Logradouro:</b>
+									</Row>
+									<Row>
+										<b>Número:</b>
+									</Row	>
+									<Row>
+										<b>Complemento:</b>
+									</Row>
+									<Row>
+										<b>Bairro:</b>
+									</Row>
+									<Row>
+										<b>CEP:</b>
+									</Row>
+									<Row>
+										<b>Cidade:</b>
+									</Row>							
+									<Row>
+										<b>Estado:</b>
+									</Row>
+									<Row>
+										<b><Link to="/home/device" style={{ color: 'white' }} >Device:</Link></b>
+									</Row>
+								</Col>						
+							</span>
+							<span className=" centered-span-row col-md-6" >
+								<Col md={6}>
 
-							{
-								this.props.getUserSuccess !== null ?
-									Object.keys(this.props.getUserSuccess.data).map((k, i) => {
-										if (i >= 1 && i !== 3) {
-											return (
-												<div className="flex-row badge badge-info mb-3" key={k + i} >
-													<b> {this.props.getUserSuccess.data[k]} </b>
-												</div>
-											);
-										}
-									}) : null
-							}
+									{
+										this.props.getUserSuccess !== null ?
+											Object.keys(this.props.getUserSuccess.data).map((k, i) => {
+												if (k !== "psw" && k !== "username" && k !== "device") {
+													return (
+														<Row key={k + i} >
+															<b> {this.props.getUserSuccess.data[k]} </b>
+														</Row>
+													);
+												}
+											}) : null
+									}
 
-						</div>
-					</div>
-					<div className="d-flex flex-column col-md-4 justify-content-center">
-						<div className="row flex-row justify-content-center" >
-							<button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/clientes">Alterar</Link></button>
-						</div>			
-					</div>
-				</div>
+								</Col>
+							</span>							
+						</Row>
+						<Row bsClass="row centered-row" >
+							<Link style={{textDecoration: "none", color: "white"}} to="/home/update/clientes"><button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} >Alterar</button></Link>
+						</Row>
+					</Panel>
+				</Row>
+
 				{/*FIM DO ROW COM INFOS DOS CLIENTES*/}
-				<div className="row nav-color rounded" style={{ margin: '20px' }}>
-					<div className="col-md-12 d-md-flex flex-md-row justify-content-around">
-						<NavSection>
-							<Link to="/home/pet">
-							<div className="alert alert-success d-flex flex-row">
-								<img alt="pata" style={{ width: '60px', height: '60px' }} src={paw} />
-								<p className="align-self-center ml-3">{ this.props.getPetSuccess !== null ? this.props.getPetSuccess.data.nome : "Buscando..." }</p>
-							</div>
-							</Link>
-						</NavSection>
-						<NavSection>
-							<Link to="/home/dieta">
-								<div className="alert alert-info d-flex flex-row">
-									<img alt="pote" style={{ width: '60px', height: '60px' }} src={bowl} />
-									<p className="align-self-center ml-3">{ this.props.getDietSuccess !== null ? this.props.getDietSuccess.data.descricao : "Buscando..." }</p>
-								</div>
-							</Link>
-						</NavSection>						
-					</div>
-				</div>
+				<Row bsClass="row centered-row">
+					<Col md={6}>
+					  <Row bsClass="row centered-row" >
+							<Col md={12}>
+								<Link to="/home/pet">
+									<Button bsStyle="primary full-button" >
+										PET
+									</Button>
+								</Link>	
+							</Col>					
+						</Row>
+					</Col>
+					<Col md={6}>
+						<Row bsClass="row centered-row" >
+							<Col md={12}>
+								<Link to="/home/dieta">
+									<Button bsStyle="primary full-button" >
+										DIETA
+									</Button>
+								</Link>	
+							</Col>					
+						</Row>
+					</Col>
+				</Row>
 				{/* FIM DO ROW NAV */}
-			</div>
+			</Col>
 		);
 	}
 }

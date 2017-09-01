@@ -3,56 +3,12 @@ import { connect } from "react-redux";
 import { getDeviceRequest } from "../../actions/deviceActions";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Row, Col, Button, Table, Panel } from 'react-bootstrap';
 
-const DivInfos = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  background-color: rgba(230, 230, 250, 0.5);
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: center;
-    border: 0.5px solid rgba(230, 230, 250, 0.5);
-    margin-top: 30px;
-  }
-`;
-
-const DivColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  a {
-    text-decoration: none;
-    color: black;
-  }
-`;
-
-const DeviceSection = styled.section`
-  display: flex;
-  padding: 5px;
-  font-size: 13px;
-  background-color: rgba(173, 216, 230, 0.5);
-  margin-left: 20px;
-  margin-right: 20px;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: center;
-    font-size: 20px;
-  }
-`;
-
-const ArticleRow = styled.article`
-  display: flex;
-  justify-content: flex-start;
-  margin: 10px;
-`;
-
-const AtividadesColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-`;
+const AtividadesTitle = styled.h3`
+  color: #3e3f3a;
+  text-align: center;
+`
 
 class DeviceDashboard extends Component {
   constructor(props) {
@@ -109,90 +65,100 @@ class DeviceDashboard extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row client-color d-md-flex flex-md-row">
-          <div className="col-md-6 d-md-flex flex-md-column">
-            <div className="row flex-row badge badge-primary m-md-3">
-              <b>ID:</b>
-            </div>
-            <div className="row flex-row badge badge-primary m-md-3 ">
-              <b>Modelo:</b>
-            </div>
-            <div className="row flex-row badge badge-primary m-md-3 ">
-              <b>Atividades:</b>
-            </div>            
-          </div>
-          {/* Segunda coluna */}
-          <div className="col-md-6 d-md-flex flex-md-column">
-            <div className="row">
-              {
-                this.props.getDeviceSuccess !== null ? 
-                    <div className="row flex-row badge badge-info m-md-3">
-                      <b>{ this.props.getDeviceSuccess.data._id }</b>
-                    </div>
-                :
-                  null
-              }
-            </div>
-            <div className="row">
-              {
-                this.props.getDeviceSuccess !== null ? 
-                    <div className="row flex-row badge badge-info m-md-3">
-                      <b>{ this.props.getDeviceSuccess.data.modelo }</b>
-                    </div>
-                :
-                  null
-              }
-            </div>            
-            <div className="row">
-              {this.state.showedAct === ""
-                ? this.props.getDeviceSuccess !== null &&
-                  this.props.getDeviceSuccess.data.atividades !== undefined
-                  ? this.props.getDeviceSuccess.data.atividades.map(
-                      (atividade, i) => {
-                        return (
-                          <div className="row badge badge-info m-md-3" key={i}>
-                            <div className="col-md-12 d-md-flex flex-md-column p-3">
-                              <b>
+      <Row>
+        <Col md={12}>
+          <Panel header="Informações" bsClass="panel" bsStyle="primary">
+            <Row>
+              <span className=" centered-span-row col-md-6" >
+                <Col md={6}>
+                  <Row>
+                    <b>ID:</b>
+                  </Row>
+                  <Row>
+                    <b>Modelo:</b>
+                  </Row>           
+                </Col>
+              </span>
+              {/* Segunda coluna */}
+              <span className=" centered-span-row col-md-6" >
+                <Col md={6}>
+                  {
+                    this.props.getDeviceSuccess !== null ? 
+                        <Row>
+                          <b>{ this.props.getDeviceSuccess.data._id }</b>
+                        </Row>
+                    :
+                      null
+                  }
+                
+                  {
+                    this.props.getDeviceSuccess !== null ? 
+                        <Row>
+                          <b>{ this.props.getDeviceSuccess.data.modelo }</b>
+                        </Row>
+                    :
+                      null
+                  }
+                </Col>
+              </span>          
+            </Row>
+            <Row>
+             <AtividadesTitle> Atividades até agora:</AtividadesTitle>  
+            </Row> 
+            <Row bsClass="row row-top-spaced">
+              <Col md={12}>
+                <Table  condensed hover>
+                  <thead>
+                    <th><tr>Horários</tr></th>
+                    <th><tr>Porções</tr></th>
+                  </thead>
+                  <tbody>
+                    {this.state.showedAct === ""
+                      ? this.props.getDeviceSuccess !== null &&
+                        this.props.getDeviceSuccess.data.atividades !== undefined
+                        ? this.props.getDeviceSuccess.data.atividades.map(
+                            (atividade, i) => {
+                              return (
+                                <tr key={i}>
+                                  <td>
+                                    {atividade.horario}
+                                  </td>
+                                  <td>
+                                    {atividade.porcao !== undefined
+                                      ? atividade.porcao + "g"
+                                      : "0g"}
+                                  </td>                                 
+                                </tr>                              
+                              );
+                            }
+                          )
+                        : this.props.isGettingDevice === false
+                          ? "Nenhuma atividade encontrada."
+                          : "Carregando..."
+                      : this.state.showedAct.map((atividade, i) => {
+                          return (
+                            <tr key={i}>
+                              <td>
                                 {atividade.horario}
-                              </b>
-                              <b>
+                              </td>
+                              <td>
                                 {atividade.porcao !== undefined
                                   ? atividade.porcao + "g"
                                   : "0g"}
-                              </b>
-                            </div>
-                          </div>
-                        );
-                      }
-                    )
-                  : this.props.isGettingDevice === false
-                    ? "Nenhuma atividade encontrada."
-                    : "Carregando..."
-                : this.state.showedAct.map((atividade, i) => {
-                    return (
-                      <div className="row" key={i}>
-                        <div className="col-md-12 d-md-flex flex-md-column">
-                          <b>
-                            {atividade.horario}
-                          </b>
-                          <b>
-                            {atividade.porcao !== undefined
-                              ? atividade.porcao + "g"
-                              : "0g"}
-                          </b>
-                        </div>
-                      </div>
-                    );
-                  })}
-            </div>
-          </div>
-        </div>
-
-        <div className="row flex-row justify-content-center">
-
-        </div>
-      </div>
+                              </td>                                 
+                            </tr> 
+                          );
+                        })}
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+						<Row bsClass="row centered-row" >
+							<Link style={{textDecoration: "none", color: "white"}} to="/home/update/dietas"><button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} >Alterar</button></Link>
+						</Row>            
+          </Panel>
+        </Col>
+      </Row>
     );
   }
 }

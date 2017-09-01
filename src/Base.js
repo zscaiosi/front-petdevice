@@ -6,28 +6,27 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Header from './components/header/HeaderComponent';
 import Home from './components/scenes/HomeScene';
+import { Grid, Row, Col, Well } from 'react-bootstrap';
 
 class Base extends Component {
 
 	render() {
 		return (
-			<div className="container">
+			<Grid fluid>
 				{localStorage.getItem("login") === null ? <Redirect to="/" /> : (JSON.parse(localStorage.getItem("login")).login.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : <Redirect to="/" />)}
-				<div className="row">
-					<div className="col-lg-2"></div>
-					<div className="col-lg-8">
+				<Well bsSize="large">
+					<Row bsClass="show-grid">
 						<Route path="/home" component={Header} />
-					</div>
-					<div className="col-lg-2"></div>
-				</div>
-				<div className="row d-flex flex-column justify-content-center">
-					<Switch>
-						<Route exact path="/" component={Login} />
-						<Route path="/cadastrar" component={CadastroWraper} />
-						<Route path="/home" component={Home} />
-					</Switch>
-				</div>
-			</div>
+					</Row>
+					<Row bsClass="show-grid centered-row">
+						<Switch>
+							<Route exact path="/" component={Login} />
+							<Route path="/cadastrar" component={CadastroWraper} />
+							<Route path="/home" component={Home} />
+						</Switch>
+					</Row>					
+				</Well>
+			</Grid>
 
 		)
 		// return (
