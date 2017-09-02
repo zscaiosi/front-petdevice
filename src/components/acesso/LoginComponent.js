@@ -4,11 +4,7 @@ import {Link} from 'react-router-dom';
 import {postLoginRequest, getUserRequest} from '../../actions/loginActions';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-<<<<<<< HEAD
-import "./styles/accesso.css";
-=======
 import { Row, Col } from 'react-bootstrap';
->>>>>>> [React-bootstrap] Implamentando estilo bootstrap.
 
 const DivContainer = styled.div`
   display: flex;
