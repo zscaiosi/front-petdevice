@@ -7,6 +7,7 @@ import {
 } from "../../actions/deviceActions";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Row, Col, Panel, Button } from 'react-bootstrap';
 
 const MarginSpan = styled.span`
   display: flex;
@@ -26,69 +27,54 @@ class PetDashboard extends Component {
 
   render() {
     return (
-      <div className="container">
+      <Row>
 
-        <div className="row">
-          <MarginSpan>
-          <div className="col-md-12">
-            <div className="col-md-12">
-              <div className="panel panel-default">
-                <div className="panel-body">
-                  <div className="table-responsive">
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>Nome</th>
-                          <th>Raça</th>
-                          <th>Porte</th>
-                          <th>Pedigree</th>
-                          <th>Espécie</th>
-                          <th>Idade</th>    
-                          <th>Device</th>                                                  
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="info">
-                          {
-                            this.props.getPetSuccess !== null
-                            ? Object.keys(
-                                this.props.getPetSuccess.data
-                              ).map((k, i) => {
-                                if (i >= 1 && i < 8) {
-                                  return (
-                                    <td key={k + i}>
-                                      {this.props.getPetSuccess.data[k]}
-                                    </td>
-                                  );
-                                }
-                              })
-                            : null
-                          }
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-          </MarginSpan>          
-        </div>
-
-        <div className="row">
-          <div className="col-md-12">
-            <div className="col-md-6">
-              <div className="col-md-6">
-                <button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/pets">Alterar</Link></button>
-              </div>
-              <div className="col-md-6" />
-            </div>
-            <div className="col-md-6" />
-          </div>
-        </div>        
-
-      </div>
+        <Col md={12}>
+          <Row>
+          <Panel header="Informações" bsClass="panel" bsStyle="primary">
+            <Col md={6}>
+              <Row>
+                <b>Nome:</b>
+              </Row>
+              <Row>
+                <b>Raça:</b>
+              </Row>
+              <Row>
+                <b>Porte:</b>
+              </Row>
+              <Row>
+                <b>Pedigree:</b>
+              </Row> 
+              <Row>
+                <b>Especie:</b>
+              </Row>
+              <Row>
+                <b>Idade:</b>
+              </Row>                                                                     
+            </Col>
+            <Col md={6}>
+              {
+                this.props.getPetSuccess !== null ? Object.keys(this.props.getPetSuccess.data).map( (key, index) => {
+                  return(
+                    (index > 0 && index < 7) ?
+                    <Row key={index+"/"+key}>
+                      <b> {this.props.getPetSuccess.data[key]} </b>
+                    </Row>
+                    :
+                    null
+                  )
+                })
+                :
+                "Carregando..."
+              }
+            </Col>
+						<Row bsClass="row centered-row" >
+							<Link style={{textDecoration: "none", color: "white"}} to="/home/update/pets"><button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} >Alterar</button></Link>
+						</Row>            
+          </Panel> 
+          </Row>         
+        </Col>        
+      </Row>
     );
   }
 }

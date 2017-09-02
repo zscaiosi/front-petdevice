@@ -152,10 +152,7 @@ class DeviceDashboard extends Component {
                   </tbody>
                 </Table>
               </Col>
-            </Row>
-						<Row bsClass="row centered-row" >
-							<Link style={{textDecoration: "none", color: "white"}} to="/home/update/dietas"><button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} >Alterar</button></Link>
-						</Row>            
+            </Row>           
           </Panel>
         </Col>
       </Row>

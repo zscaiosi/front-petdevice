@@ -84,7 +84,7 @@ class ClienteDashboard extends Component {
 									{
 										this.props.getUserSuccess !== null ?
 											Object.keys(this.props.getUserSuccess.data).map((k, i) => {
-												if (k !== "psw" && k !== "username" && k !== "device") {
+												if (k !== "psw" && k !== "username" && k !== "device" && k !== "_id") {
 													return (
 														<Row key={k + i} >
 															<b> {this.props.getUserSuccess.data[k]} </b>

@@ -27,6 +27,7 @@ const DietForm = (props) => {
       <InputField inputType="number" min={1} name="frequencia_diaria" value={props.values.frequencia_diaria} fieldName="Frequência Diária" onChange={event => props.hasChanged(event)} />
       <InputField inputType="date" name="data_inicio" value={props.values.data_inicio} fieldName="Data Início" onChange={event => props.hasChanged(event)} />
       <InputField inputType="date" name="data_fim" value={props.values.data_fim} fieldName="Data Fim" onChange={event => props.hasChanged(event)} />
+      <InputField inputType="number" min={100} name="qtde_racao" value={props.values.qtde_racao} fieldName="Quantidade de Ração (g):" onChange={event => props.hasChanged(event)} />
       <InputField inputType="select" name="horarios" selectData={["00:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "17:00:00", "18:00:00" ]}  fieldName="Horários" onChange={event => props.hasChanged(event)} />
       <HorariosDiv>
         { props.values.horarios.map( (horario, index) => {
