@@ -201,7 +201,7 @@ class UpdateForm extends Component{
 
       <div className="row d-flex">
         <div className="col-sm-12 d-flex flex-sm-row justify-content-center">
-         { this.state.updateSuccess !== null && this.state.updateSuccess.ok === true ? <div className="alert alert-success">Atualizado</div> : null }
+         { this.state.updateSuccess !== null && this.state.updateSuccess.ok === true ? <div style={{ textAlign: 'center' }} className="alert alert-success">Atualizado</div> : null }
         </div>
       </div>
 

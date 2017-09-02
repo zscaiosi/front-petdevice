@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import UpdateForm from './UpdateForm';
+import { Row, Col, Panel } from 'react-bootstrap';
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -81,24 +82,26 @@ class Home extends Component {
 
   render(){
     return(
-      <ContainerDiv>
-        <WelcomeContainer>
-          <WelcomeSection>
+      <Col md={12}>
+        <Row>
+          <Col md={6}>
             <h2>Olá {this.props.postLoginSuccess !== null ? this.props.postLoginSuccess.user.nome : "---"}!</h2>
             <h3> { this.showPhrase() } </h3>
-          </WelcomeSection>
-          <UserInfoSection>
+          </Col>
+          <Col md={6}>
             <p>Controle aqui seu device, suas informações e as informações do seu PET!</p>
-          </UserInfoSection>
-        </WelcomeContainer>
-        <Switch>
-          <Route path="/home/cliente" component={ClienteDashboard} />
-          <Route path="/home/pet" component={PetDashboard} />
-          <Route path="/home/dieta" component={DietsDashboard} />
-          <Route path="/home/device" component={DeviceDashboard} />
-          <Route path="/home/update/:entity" component={UpdateForm} />
-        </Switch>
-      </ContainerDiv>      
+          </Col>
+        </Row>
+        <Row>
+          <Switch>
+            <Route path="/home/cliente" component={ClienteDashboard} />
+            <Route path="/home/pet" component={PetDashboard} />
+            <Route path="/home/dieta" component={DietsDashboard} />
+            <Route path="/home/device" component={DeviceDashboard} />
+            <Route path="/home/update/:entity" component={UpdateForm} />
+          </Switch>          
+        </Row>
+      </Col>      
     );
   }
 }

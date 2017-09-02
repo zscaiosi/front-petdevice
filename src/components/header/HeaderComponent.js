@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {Nav, NavItem, Grid, Row} from 'react-bootstrap';
 
 class Header extends Component {
 
@@ -16,17 +17,17 @@ class Header extends Component {
 
   render(){
     return(
-      <div className="container">
-        <div className="d-flex ">
-          <div className="flex-row panel-heading" >
-            <b className="badge badge-default"> <Link to="/home/pet" style={{ margin: '10px' }}>PETS</Link> </b>
-            <b className="badge badge-default"> <Link to="/home/dieta" style={{ margin: '10px' }} >DIETAS</Link> </b>
-            <b className="badge badge-default"> <Link to="/home/device" style={{ margin: '10px' }} >DEVICES</Link> </b>
-            <b className="badge badge-default"> <Link to="/home/cliente" style={{ margin: '10px' }} >CLIENTE</Link> </b>
-            <b onClick={this.handleLogut} style={{ margin: '10px' }} > Logout </b>
-          </div>
-        </div>
-      </div>
+      <Row>
+        <Nav bsClass="navbar navbar-default ">
+          <Nav bsClass="nav navbar-nav ">
+            <NavItem> <Link to="/home/pet" >PETS</Link> </NavItem>
+            <NavItem> <Link to="/home/dieta"  >DIETAS</Link> </NavItem>
+            <NavItem> <Link to="/home/device"  >DEVICES</Link> </NavItem>
+            <NavItem> <Link to="/home/cliente"  >CLIENTE</Link> </NavItem>
+            <NavItem onClick={this.handleLogut}  > Logout </NavItem>
+          </Nav>
+        </Nav>
+      </Row>
     );    
   }
 }

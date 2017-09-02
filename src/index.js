@@ -9,7 +9,7 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { loadState, saveState } from './localStorage';
 import './style/index.css';
-import 'bootstrap';
+import { Grid } from 'react-bootstrap';
 
 const persistingState = loadState();
 
@@ -25,9 +25,9 @@ store.subscribe( () => {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-    <div className="container container-index">
+    <Grid fluid bsClass="container">
         <Route path="/" component={Base} />
-    </div>         
+    </Grid>         
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
