@@ -63,3 +63,9 @@ ul.navbar{
 .row-top-spaced{
   margin-top: 35px;
 }
+
+.form-row-signup{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
