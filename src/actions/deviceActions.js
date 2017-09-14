@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {localApi, awsApi} from '../config.json';
+import {awsApi} from '../config.json';
 
 export const GET_DEVICE = 'GET_DEVICE';
 export const GET_DEVICE_SUCCESS = 'GET_DEVICE_SUCCESS';

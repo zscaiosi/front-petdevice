@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Nav, NavItem, Grid, Row} from 'react-bootstrap';
+import {Nav, NavItem, Row} from 'react-bootstrap';
 
 class Header extends Component {
 

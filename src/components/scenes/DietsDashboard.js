@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 //import { getPetRequest, getDietRequest } from '../../actions/deviceActions';
 import {Link} from 'react-router-dom';
-import styled from 'styled-components';
-import { Row, Col, Panel, Button } from 'react-bootstrap';
+
+import { Row, Col, Panel } from 'react-bootstrap';
 
 class DietDashboard extends Component {
   constructor(props){
