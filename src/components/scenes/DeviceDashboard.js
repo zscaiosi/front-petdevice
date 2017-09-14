@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getDeviceRequest } from "../../actions/deviceActions";
-import { Link } from "react-router-dom";
+
 import styled from "styled-components";
-import { Row, Col, Button, Table, Panel } from 'react-bootstrap';
+import { Row, Col, Table, Panel } from 'react-bootstrap';
 
 const AtividadesTitle = styled.h3`
   color: #3e3f3a;

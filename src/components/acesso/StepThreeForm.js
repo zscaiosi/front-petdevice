@@ -4,12 +4,6 @@ import {localApi, awsApi} from '../../config.json';
 import InputField from '../reusable/InputFieldComponent';
 import styled from 'styled-components';
 //Styled components para evitar arquivos CSS
-const OutterDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-`
 
 const FormDiv = styled.div`
   display: flex;
@@ -92,7 +86,7 @@ class StepThreeForm extends Component {
 
     if( name === "horarios" ){
       let currentHorarios = this.state.horarios;
-
+      // eslint-disable-next-line
       currentHorarios.indexOf(value) === -1 && currentHorarios.length < this.state.frequencia_diaria ? currentHorarios.push(value) : null
 
       console.log(currentHorarios)
@@ -121,6 +115,7 @@ class StepThreeForm extends Component {
           <div className="col-md-12">
             <InputField inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="number" min={1} name="frequencia_diaria" value={this.state.frequencia_diaria} fieldName="Frequência Diária" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="number" min={100} name="qtde_racao" value={this.state.qtde_racao} fieldName="Quantidade por Porção (g)" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="date" name="data_inicio" value={this.state.data_inicio} fieldName="Data Início" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="date" name="data_fim" value={this.state.data_fim} fieldName="Data Fim" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="select" name="horarios" selectData={["00:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "17:00:00" ]}  fieldName="Horários" onChange={event => this.handleInputChange(event)} />
