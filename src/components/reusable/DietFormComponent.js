@@ -30,7 +30,7 @@ const DietForm = (props) => {
       <InputField inputType="number" min={100} name="qtde_racao" value={props.values.qtde_racao} fieldName="Quantidade de Ração (g):" onChange={event => props.hasChanged(event)} />
       <InputField inputType="select" name="horarios" selectData={["00:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "17:00:00", "18:00:00" ]}  fieldName="Horários" onChange={event => props.hasChanged(event)} />
       <HorariosDiv>
-        { props.values.horarios.map( (horario, index) => {
+        { props.values.horarios !== null ? props.values.horarios.map( (horario, index) => {
           return(
             <HorariosRow key={index+"/"+horario} >
               <b> {horario} </b> <p name="exclude" onClick={(e) => {
@@ -45,7 +45,9 @@ const DietForm = (props) => {
               }} > x </p>
             </HorariosRow>
           )
-        }) }
+        })
+        :
+        null }
       </HorariosDiv>
       <div className="row d-flex flex-sm-row justify-content-center">
         <button onClick={event => props.handleSubmit("dietas")} type="submit" name="submit-btn">Alterar</button> 

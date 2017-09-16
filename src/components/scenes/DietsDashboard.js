@@ -19,7 +19,6 @@ class DietDashboard extends Component {
   }
 
   render(){
-    
     return(
       <Col md={12}>
 				<Row >
@@ -50,28 +49,30 @@ class DietDashboard extends Component {
               <span className=" centered-span-row col-md-6" >
                 <Col md={6}>
                   {
-                    this.props.getDietSuccess !== null ?
-                    Object.keys(this.props.getDietSuccess.data).map( (k, i) => {
-                      if( i >= 1 && i < 6 ){
-                        return(
-                          <Row key={k+i}>
-                            { this.props.getDietSuccess.data[k] === "" ? <b>"---"</b> : <b>{this.props.getDietSuccess.data[k]}</b> }
-                          </Row>
-                        );
-                      }else if( i === 7 ){
-                        return(
-                          <Row key={k+i}>
-                            { this.props.getDietSuccess.data["horarios"].map( (horario, index) => {
-                              return (        
-                                <Row key={horario+index}>
-                                  <b>{horario}</b>
-                                </Row>
-                              );
-                            }) }
-                          </Row>
-                        );
-                      }
-                    }) : null
+                    this.props.getDietSuccess !== null && this.props.getDietSuccess.data !== null ?
+                      Object.keys(this.props.getDietSuccess.data).map( (k, i) => {
+                        if( i >= 1 && i < 6 ){
+                          return(
+                            <Row key={k+i}>
+                              { this.props.getDietSuccess.data[k] === "" ? <b>"---"</b> : <b>{this.props.getDietSuccess.data[k]}</b> }
+                            </Row>
+                          );
+                        }else if( i === 7 ){
+                          return(
+                            <Row key={k+i}>
+                              { this.props.getDietSuccess.data["horarios"].map( (horario, index) => {
+                                return (        
+                                  <Row key={horario+index}>
+                                    <b>{horario}</b>
+                                  </Row>
+                                );
+                              }) }
+                            </Row>
+                          );
+                        }
+                      })
+                    :
+                    this.props.getDietSuccess.response === "ok" && this.props.getDietSuccess.data === null ? <p>Clique em "Alterar" para cadastrar uma dieta!</p> : <p>Aguarde...</p>
                   }
                 </Col>
               </span>

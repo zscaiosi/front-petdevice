@@ -3,6 +3,8 @@ import axios from 'axios';
 import {localApi, awsApi} from '../../config.json';
 import InputField from '../reusable/InputFieldComponent';
 import styled from 'styled-components';
+import {Row, Col, Button} from 'react-bootstrap';
+
 //Styled components para evitar arquivos CSS
 const OutterDiv = styled.div`
   width: 100%;
@@ -85,20 +87,21 @@ class StepOneForm extends Component {
 
   render(){
     return(
-      <div className="panel panel-default col-md-8">
-        <div className="row" >
-          <div className="col-md-12">
-            <InputField inputType="text" name="nome" value={this.state.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
-            <InputField inputType="text" name="raca" value={this.state.raca} maxLength="75" fieldName="Raça" onChange={event => this.handleInputChange(event)} />
-            <InputField inputType="number" name="idade" value={this.state.idade} maxLength="2" fieldName="Idade" onChange={event => this.handleInputChange(event)} />
-            <InputField inputType="radio" name="pedigree" radioOptions={["sim", "não"]} value={this.state.pedigree} fieldName="Pedigree" onChange={event => this.handleInputChange(event)} />
-            <InputField inputType="radio" name="porte" radioOptions={["pequeno", "medio", "grande"]} value={this.state.porte} fieldName="Porte" onChange={event => this.handleInputChange(event)} />
-            <InputField inputType="radio" name="especie" radioOptions={["cão", "gato"]} value={this.state.especie} fieldName="Especie" onChange={event => this.handleInputChange(event)} />
-            
-            <button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</button>
-          </div>
-        </div>
-      </div>
+      <Row>
+        <Col md={12} >
+          <InputField inputType="text" name="nome" value={this.state.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
+          <InputField inputType="text" name="raca" value={this.state.raca} maxLength="75" fieldName="Raça" onChange={event => this.handleInputChange(event)} />
+          <InputField inputType="number" name="idade" value={this.state.idade} maxLength="2" fieldName="Idade" onChange={event => this.handleInputChange(event)} />
+          <InputField inputType="radio" name="pedigree" radioOptions={["sim", "não"]} value={this.state.pedigree} fieldName="Pedigree" onChange={event => this.handleInputChange(event)} />
+          <InputField inputType="radio" name="porte" radioOptions={["pequeno", "medio", "grande"]} value={this.state.porte} fieldName="Porte" onChange={event => this.handleInputChange(event)} />
+          <InputField inputType="radio" name="especie" radioOptions={["cão", "gato"]} value={this.state.especie} fieldName="Especie" onChange={event => this.handleInputChange(event)} />
+          <Row>
+            <Col md={12} style={{ display: 'flex', flexDirection: 'column' }} >
+              <Button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</Button>                
+            </Col>         
+          </Row>    
+        </Col>
+      </Row>
     );
   }
 

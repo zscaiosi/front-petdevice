@@ -160,7 +160,7 @@ class Login extends Component {
                 {this.state.errorMessage !== "" ? <BadMessageArticle> E-mail ou senha incorretos. </BadMessageArticle> : null}
               </ActionsColumnSection>
             </form>
-            { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }          
+            { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }
           </Col>
 
         </Row>

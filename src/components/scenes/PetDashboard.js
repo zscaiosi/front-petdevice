@@ -28,7 +28,6 @@ class PetDashboard extends Component {
   render() {
     return (
       <Row>
-
         <Col md={12}>
           <Row>
           <Panel header="Informações" bsClass="panel" bsStyle="primary">
@@ -54,7 +53,7 @@ class PetDashboard extends Component {
             </Col>
             <Col md={6}>
               {
-                this.props.getPetSuccess !== null ? Object.keys(this.props.getPetSuccess.data).map( (key, index) => {
+                this.props.getPetSuccess !== null && this.props.getPetSuccess.data !== null ? Object.keys(this.props.getPetSuccess.data).map( (key, index) => {
                   return(
                     (index > 0 && index < 7) ?
                     <Row key={index+"/"+key}>
@@ -65,7 +64,9 @@ class PetDashboard extends Component {
                   )
                 })
                 :
-                "Carregando..."
+                <Row>
+                  <p>Carregando... </p>
+                </Row>
               }
             </Col>
 						<Row bsClass="row centered-row" >

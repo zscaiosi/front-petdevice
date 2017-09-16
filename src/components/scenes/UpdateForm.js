@@ -11,7 +11,7 @@ import {getUserRequest} from '../../actions/loginActions';
 class UpdateForm extends Component{
   constructor(props){
     super(props);
-
+console.log("PROPS",this.props.getDeviceSuccess);
     this.state = {
       clientPayload: {
         _id: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data._id : this.props.user._id,
@@ -26,26 +26,29 @@ class UpdateForm extends Component{
         bairro: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.bairro : this.props.user.bairro,
         cep: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.cep : this.props.user.cep,
         cidade: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.cidade : this.props.user.cidade,
-        estado: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.estado : this.props.user.estado,
+        estado: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.estado : this.props.user.estado
       },
       petPayload: {
-        _id: this.props.getPetSuccess._id,
-        nome: this.props.getPetSuccess.nome,
-        raca: this.props.getPetSuccess.raca,
-        porte: this.props.getPetSuccess.porte,
-        pedigree: this.props.getPetSuccess.pedigree,
-        especie: this.props.getPetSuccess.especie,
-        idade: this.props.getPetSuccess.idade,
+        _id: this.props.getPetSuccess !== null ? this.props.getPetSuccess._id : null,
+        nome: this.props.getPetSuccess !== null ? this.props.getPetSuccess.nome : null,
+        raca: this.props.getPetSuccess !== null ? this.props.getPetSuccess.raca : null,
+        porte: this.props.getPetSuccess !== null ? this.props.getPetSuccess.porte : null,
+        pedigree: this.props.getPetSuccess !== null ? this.props.getPetSuccess.pedigree : null,
+        especie: this.props.getPetSuccess !== null ? this.props.getPetSuccess.especie : null,
+        idade: this.props.getPetSuccess !== null ? this.props.getPetSuccess.idade : null,
+        dono: this.props.getUserSuccess !== null ? this.props.getUserSuccess.data._id : this.props.user._id,
+        device: this.props.getDeviceSuccess !== null ? this.props.getDeviceSuccess.data._id : null
       },
       dietPayload: {
-        _id: this.props.getDietSuccess.data._id,
-        descricao: this.props.getDietSuccess.data.descricao,
-        frequencia_diaria: this.props.getDietSuccess.data.frequencia_diaria,
-        data_inicio: this.props.getDietSuccess.data.data_inicio,
-        data_fim: this.props.getDietSuccess.data.data_fim,
-        qtde_racao: this.props.getDietSuccess.data.qtde_racao,
-        horarios: this.props.getDietSuccess.data.horarios,
-        ativa: this.props.getDietSuccess.data.ativa,
+        _id: this.props.getDietSuccess.data !== null ? this.props.getDietSuccess.data._id : null,
+        descricao: this.props.getDietSuccess.data !== null ? this.props.getDietSuccess.data.descricao : null,
+        frequencia_diaria: this.props.getDietSuccess.data !== null ? this.props.getDietSuccess.data.frequencia_diaria : null,
+        data_inicio: this.props.getDietSuccess.data !== null ? this.props.getDietSuccess.data.data_inicio : null,
+        data_fim: this.props.getDietSuccess.data !== null ? this.props.getDietSuccess.data.data_fim : null,
+        qtde_racao: this.props.getDietSuccess.data !== null ? this.props.getDietSuccess.data.qtde_racao : null,
+        horarios: this.props.getDietSuccess.data !== null ? this.props.getDietSuccess.data.horarios : [],
+        ativa: this.props.getDietSuccess.data !== null ? this.props.getDietSuccess.data.ativa : null,
+        device: this.props.getDeviceSuccess !== null ? this.props.getDeviceSuccess.data._id : null
       },
       updateSuccess: null
     }
@@ -58,6 +61,7 @@ class UpdateForm extends Component{
 
     if( this.state.updateSuccess !== null && prevState.updateSuccess !== this.state.updateSuccess ){
       this.props.getUserRequest(this.props.user._id);
+      window.location.reload();
     }
 
   }
@@ -215,7 +219,8 @@ const mapStateToProps = (state) => {
     getDietSuccess: state.device.getDietSuccess,
     user: state.login.postLoginSuccess.user,
     getPetSuccess: state.device.getPetSuccess.data,
-    getUserSuccess: state.login.getUserSuccess
+    getUserSuccess: state.login.getUserSuccess,
+    getDeviceSuccess: state.device.getDeviceSuccess
   }
 }
 
