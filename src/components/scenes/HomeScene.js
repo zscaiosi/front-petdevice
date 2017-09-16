@@ -89,7 +89,7 @@ class Home extends Component {
             <h3> { this.showPhrase() } </h3>
           </Col>
           <Col md={6}>
-            <p>Controle aqui seu device, suas informações e as informações do seu PET!</p>
+
           </Col>
         </Row>
         <Row>

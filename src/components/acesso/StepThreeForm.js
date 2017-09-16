@@ -105,7 +105,13 @@ class StepThreeForm extends Component {
 
   handleSubmit(event){
     event.preventDefault();
-    this.postDietRequest();
+
+    if( this.state.data_inicio === '' || this.state.data_fim === '' ){
+      alert("Selecione datas INÍCIO e FIM válidas!");
+    }else{
+      this.postDietRequest();
+    }
+
   }
 
   render(){
@@ -118,7 +124,19 @@ class StepThreeForm extends Component {
             <InputField inputType="number" min={100} name="qtde_racao" value={this.state.qtde_racao} fieldName="Quantidade por Porção (g)" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="date" name="data_inicio" value={this.state.data_inicio} fieldName="Data Início" onChange={event => this.handleInputChange(event)} />
             <InputField inputType="date" name="data_fim" value={this.state.data_fim} fieldName="Data Fim" onChange={event => this.handleInputChange(event)} />
-            <InputField inputType="select" name="horarios" selectData={["00:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "17:00:00" ]}  fieldName="Horários" onChange={event => this.handleInputChange(event)} />
+            <InputField inputType="select" name="horarios" selectData={
+                [
+                  "00:00:00", "09:00:00", "09:15:00", "09:30:00", "09:45:00",
+                  "10:00:00", "10:15:00", "10:30:00",
+                  "10:45:00", "11:00:00", "11:15:00", "11:30:00", "11:45:00", "12:00:00",
+                  "12:15:00", "12:30:00", "12:45:00", "13:00:00", "13:15:00", "13:30:00", "13:45:00",
+                  "15:00:00", "15:15:00", "15:30:00", "16:00:00", "16:15:00", "16:30:00", "16:45:00",
+                  "17:15:00", "17:30:00", "17:45:00", "18:00:00", "18:15:00", "18:30:00", "19:00:00",
+                  "19:15:00", "19:30:00", "20:00:00"
+                ]
+              }
+              fieldName="Horários" onChange={event => this.handleInputChange(event)} />
+              <p style={{color: 'red'}}>*Ao mudar os horários, eles são adicionados.</p>
             <HorariosDiv>
               { this.state.horarios.map( (horario, index) => {
                 return(

@@ -153,11 +153,11 @@ class Login extends Component {
                 <input className="form-control" id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
               </div>
               <ActionsColumnSection>
-                <button className="btn btn-default" style={{ cursor: 'pointer' }} onClick={this.handleSubmit} type="submit">Entrar</button>
+                <button className="btn btn-default" style={{ cursor: 'pointer' }} onClick={this.handleSubmit} type="submit">{ this.props.isPostingLogin ? "Aguarde..." : "Entrar" }</button>
 
                 <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
           
-                {this.state.errorMessage !== "" ? <BadMessageArticle> {this.state.errorMessage} </BadMessageArticle> : null}
+                {this.state.errorMessage !== "" ? <BadMessageArticle> E-mail ou senha incorretos. </BadMessageArticle> : null}
               </ActionsColumnSection>
             </form>
             { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }          
