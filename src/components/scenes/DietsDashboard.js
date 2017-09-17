@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-//import { getPetRequest, getDietRequest } from '../../actions/deviceActions';
+import { getDietRequest } from '../../actions/deviceActions';
 import {Link} from 'react-router-dom';
 
 import { Row, Col, Panel } from 'react-bootstrap';
@@ -16,6 +16,7 @@ class DietDashboard extends Component {
 
   componentDidMount(){
     console.log("localStorage: ", localStorage);
+    this.props.getDietRequest(this.props.postLoginSuccess.user.device);
   }
 
   render(){
@@ -72,7 +73,7 @@ class DietDashboard extends Component {
                         }
                       })
                     :
-                    this.props.getDietSuccess.response === "ok" && this.props.getDietSuccess.data === null ? <p>Clique em "Alterar" para cadastrar uma dieta!</p> : <p>Aguarde...</p>
+                    this.props.getDietSuccess !== null && this.props.getDietSuccess.response === "ok" && this.props.getDietSuccess.data === null ? <p>Clique em "Alterar" para cadastrar uma dieta!</p> : <p>Aguarde...</p>
                   }
                 </Col>
               </span>
@@ -103,4 +104,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(DietDashboard);
+export default connect(mapStateToProps, {getDietRequest})(DietDashboard);

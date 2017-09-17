@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Row, Col, Panel, Button } from 'react-bootstrap';
 
+
 const MarginSpan = styled.span`
   display: flex;
   margin-top: 35px;
@@ -23,6 +24,7 @@ class PetDashboard extends Component {
 
   componentDidMount() {
     console.log("localStorage: ", localStorage);
+    this.props.getPetRequest(this.props.postLoginSuccess.user.device);
   }
 
   render() {

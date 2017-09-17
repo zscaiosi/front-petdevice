@@ -20,7 +20,7 @@ class ClienteDashboard extends Component {
 		//console.log("localStorage: ", localStorage);
 		//Só faz os requests caso ainda não tenha no state as informações
 		(this.props.getPetSuccess === null || this.props.getPetSuccess.data === null) && this.props.postLoginSuccess !== null ? this.props.getPetRequest(this.props.postLoginSuccess.user.device) : null;
-		this.props.getDietSuccess === null && this.props.postLoginSuccess !== null ? this.props.getDietRequest(this.props.postLoginSuccess.user.device) : null;
+		this.props.postLoginSuccess !== null ? this.props.getDietRequest(this.props.postLoginSuccess.user.device) : null;
 		this.props.getDeviceSuccess === null && this.props.postLoginSuccess !== null ? this.props.getDeviceRequest(this.props.postLoginSuccess.user.device) : null;
 		this.props.getUserSuccess === null && this.props.postLoginSuccess !== null ? this.props.getUserRequest(this.props.postLoginSuccess.user._id) : null;
 	}

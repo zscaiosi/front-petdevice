@@ -115,6 +115,7 @@ const getDietError = (error) => {
 }
 
 export const getDietRequest = (device) => {
+  console.log("GET DIET SUCCESS", device)
   const instance = axios.create({
     headers: {
       "Content-Type" : "application/json"

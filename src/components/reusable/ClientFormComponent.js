@@ -7,7 +7,7 @@ const ClientForm = (props) => {
       <InputField inputType="text" name="nome" value={props.values.nome} maxLength="75" fieldName="Nome" onChange={event => props.hasChanged(event)} />
       <InputField inputType="text" name="email" value={props.values.email} maxLength="75" fieldName="E-mail" onChange={event => props.hasChanged(event)} />
       <InputField inputType="password" name="psw" value={props.values.psw} maxLength="135" fieldName="Senha" onChange={event => props.hasChanged(event)} />
-      <InputField inputType="radio" name="sexo" radioOptions={["masculino", "feminino", "não binário"]} value={props.values.sexo} fieldName="Sexo" onChange={event => props.hasChanged(event)} />
+      <InputField inputType="radio" name="sexo" radioOptions={["masculino", "feminino"]} value={props.values.sexo} fieldName="Sexo" onChange={event => props.hasChanged(event)} />
       <InputField inputType="date" name="dtNascimento" value={props.values.dtNascimento} fieldName="Data de Nascimento" onChange={event => props.hasChanged(event)} />
       <InputField inputType="text" name="logradouro" value={props.values.logradouro} fieldName="Logradouro" onChange={event => props.hasChanged(event)} />
       <InputField inputType="number" name="numero" value={props.values.numero} fieldName="Número" onChange={event => props.hasChanged(event)} />
