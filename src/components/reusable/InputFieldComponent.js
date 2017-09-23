@@ -27,14 +27,14 @@ class InputField extends Component {
 			return (
 				<FieldWraper>
 					<label htmlFor={this.props.name} > {this.props.fieldName} </label>
-					<input id={this.props.name} name={this.props.name} type="text" value={this.props.value} maxLength={this.props.maxLength ? this.props.maxLength : 100} onChange={this.props.onChange} />
+					<input className={this.props.styleClass} id={this.props.name} name={this.props.name} type="text" value={this.props.value} maxLength={this.props.maxLength ? this.props.maxLength : 100} onChange={this.props.onChange} />
 				</FieldWraper>
 			);
 		} else if (this.props.inputType === "select") {
 			return (
 				<FieldWraper>
 					<label > {this.props.fieldName} </label>
-					<select name={this.props.name} defaultValue="Selecione..." onChange={this.props.onChange}>
+					<select className={this.props.styleClass} name={this.props.name} defaultValue="Selecione..." onChange={this.props.onChange}>
 						{this.props.selectData.map((data, index) => {
 							return (
 								<option key={index} value={data}>{data}</option>
@@ -47,14 +47,14 @@ class InputField extends Component {
 			return (
 				<FieldWraper>
 					<label htmlFor={this.props.name} > {this.props.fieldName} </label>
-					<input id={this.props.name} name={this.props.name} type="number" min={this.props.min} max="99999" value={this.props.value} onChange={this.props.onChange} />
+					<input className={this.props.styleClass} id={this.props.name} name={this.props.name} type="number" min={this.props.min} max="99999" value={this.props.value} onChange={this.props.onChange} />
 				</FieldWraper>
 			);
 		} else if (this.props.inputType === "password") {
 			return (
 				<FieldWraper>
 					<label htmlFor={this.props.name} > {this.props.fieldName} </label>
-					<input id={this.props.name} name={this.props.name} type="password" value={this.props.value} maxLength={this.props.maxLength ? this.props.maxLength : 100} onChange={this.props.onChange} />
+					<input className={this.props.styleClass} id={this.props.name} name={this.props.name} type="password" value={this.props.value} maxLength={this.props.maxLength ? this.props.maxLength : 100} onChange={this.props.onChange} />
 				</FieldWraper>
 			);
 		} else if (this.props.inputType === "radio") {
@@ -75,7 +75,7 @@ class InputField extends Component {
 			return(
 				<FieldWraper>
 					<label htmlFor={this.props.name} > {this.props.fieldName} </label>
-					<input id={this.props.name} name={this.props.name} type="date" value={this.props.value} onChange={this.props.onChange} />
+					<input className={this.props.styleClass} id={this.props.name} name={this.props.name} type="date" value={this.props.value} onChange={this.props.onChange} />
 				</FieldWraper>				
 			);
 		}

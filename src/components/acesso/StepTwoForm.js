@@ -87,21 +87,42 @@ class StepOneForm extends Component {
 
   render(){
     return(
-      <Row>
-        <Col md={12} >
-          <InputField inputType="text" name="nome" value={this.state.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="text" name="raca" value={this.state.raca} maxLength="75" fieldName="Raça" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="number" name="idade" value={this.state.idade} maxLength="2" fieldName="Idade" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="radio" name="pedigree" radioOptions={["sim", "não"]} value={this.state.pedigree} fieldName="Pedigree" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="radio" name="porte" radioOptions={["pequeno", "medio", "grande"]} value={this.state.porte} fieldName="Porte" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="radio" name="especie" radioOptions={["cão", "gato"]} value={this.state.especie} fieldName="Especie" onChange={event => this.handleInputChange(event)} />
-          <Row>
-            <Col md={12} style={{ display: 'flex', flexDirection: 'column' }} >
-              <Button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</Button>                
-            </Col>         
-          </Row>    
-        </Col>
-      </Row>
+      <div className="row">
+        <div className="col-md-8 col-md-offset-2">
+          <div className="login-panel panel panel-default">
+            <div className="panel-heading">
+              <h2 className="panel-title"><strong>Informações do PET</strong></h2>
+            </div>
+            <div className="panel-body">
+              <form role="form" onSubmit={(e) => e.preventDefault()}>
+                <fieldset>
+                  <div className="form-group">
+                    <InputField styleClass="form-control" inputType="text" name="nome" value={this.state.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField styleClass="form-control" inputType="text" name="raca" value={this.state.raca} maxLength="75" fieldName="Raça" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField styleClass="form-control" inputType="number" name="idade" value={this.state.idade} maxLength="2" fieldName="Idade" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField styleClass="form-control" inputType="radio" name="pedigree" radioOptions={["sim", "não"]} value={this.state.pedigree} fieldName="Pedigree" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField styleClass="form-control" inputType="radio" name="porte" radioOptions={["pequeno", "medio", "grande"]} value={this.state.porte} fieldName="Porte" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField styleClass="form-control" inputType="radio" name="especie" radioOptions={["cão", "gato"]} value={this.state.especie} fieldName="Especie" onChange={event => this.handleInputChange(event)} />                                                                                                            
+                  </div>            
+                  <span style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+                    <Button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</Button> <br/>             
+                  </span>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>         
     );
   }
 

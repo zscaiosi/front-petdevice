@@ -50,7 +50,7 @@ class CadastroWraper extends Component {
 
   render(){
     return(
-      <div className="row form-row-signup" >
+      <div className="container" >
         {this.renderChildren()}
       </div>
     );

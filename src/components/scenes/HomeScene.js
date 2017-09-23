@@ -5,45 +5,11 @@ import DietsDashboard from './DietsDashboard';
 import DeviceDashboard from './DeviceDashboard';
 import { Switch, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
-import styled from 'styled-components';
+import SideBar from '../header/SideBarComponent';
+// import styled from 'styled-components';
 import UpdateForm from './UpdateForm';
-import { Row, Col, Panel } from 'react-bootstrap';
+import Header from '../header/HeaderComponent';
 
-const ContainerDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const WelcomeContainer = styled.section`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-top: 20px;
-  padding: 10px;
-`
-
-const WelcomeSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-  margin-right: 20px;
-  justify-content: center;
-
-  h2{
-    margin: 10px 0px 0px 0px;
-  }
-  h3{
-    margin: 10px 0px 0px 0px;
-  }
-
-  @media(min-width: 768px){
-    max-width: 500px;
-  }
-`
-
-const UserInfoSection = styled.section`
-  display: flex;
-`
 
 class Home extends Component {
   constructor(props){
@@ -82,26 +48,26 @@ class Home extends Component {
 
   render(){
     return(
-      <Col md={12}>
-        <Row>
-          <Col md={6}>
-            <h2>Olá {this.props.postLoginSuccess !== null ? this.props.postLoginSuccess.user.nome : "---"}!</h2>
-            <h3> { this.showPhrase() } </h3>
-          </Col>
-          <Col md={6}>
-
-          </Col>
-        </Row>
-        <Row>
-          <Switch>
-            <Route path="/home/cliente" component={ClienteDashboard} />
-            <Route path="/home/pet" component={PetDashboard} />
-            <Route path="/home/dieta" component={DietsDashboard} />
-            <Route path="/home/device" component={DeviceDashboard} />
-            <Route path="/home/update/:entity" component={UpdateForm} />
-          </Switch>          
-        </Row>
-      </Col>      
+      <div className="row">
+        <div className="row">
+          <Header />
+        </div>
+        <div className="row">
+          <div className="col-md-2 full-navbar" style={{padding: '0px'}} >
+            <SideBar />
+          </div>
+          <div className="col-md-8">
+            <Switch>
+              <Route path="/home/cliente" component={ClienteDashboard} />
+              <Route path="/home/pet" component={PetDashboard} />
+              <Route path="/home/dieta" component={DietsDashboard} />
+              <Route path="/home/device" component={DeviceDashboard} />
+              <Route path="/home/update/:entity" component={UpdateForm} />
+            </Switch>              
+          </div>          
+        </div>        
+        {/* CONTEÚDOS */}         
+      </div>
     );
   }
 }
