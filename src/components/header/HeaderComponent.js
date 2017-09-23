@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Nav, NavItem, Row} from 'react-bootstrap';
+import logo from '../../images/logo-bar.png';
 
 class Header extends Component {
 
@@ -17,17 +17,28 @@ class Header extends Component {
 
   render(){
     return(
-      <Row>
-        <Nav bsClass="navbar navbar-default ">
-          <Nav bsClass="nav navbar-nav ">
-            <NavItem> <Link to="/home/pet" >PETS</Link> </NavItem>
-            <NavItem> <Link to="/home/dieta"  >DIETAS</Link> </NavItem>
-            <NavItem> <Link to="/home/device"  >DEVICES</Link> </NavItem>
-            <NavItem> <Link to="/home/cliente"  >CLIENTE</Link> </NavItem>
-            <NavItem onClick={this.handleLogut}  > Logout </NavItem>
-          </Nav>
-        </Nav>
-      </Row>
+      <div className="wrapper">
+        <nav className="navbar navbar-default" role="navigation" style={{marginBottom: 0}}>
+          <div className="container-fluid d-flex flex-row justify-content-around">
+
+            <div className="navbar-header">	
+              <img className="navbar-brand" src={logo} />
+            </div>
+
+            <ul className="nav navbar-nav" >														
+              <li>
+                <a target="_blank" href="mailto:grupo.petdevice@gmail.com" >
+                  <i className="fa fa-envelope fa-fw" title="Entre em contato conosco" />
+                </a>
+              </li>
+              <li onClick={() => this.handleLogut()}>
+                <Link to="/home/cliente"><i className="fa fa-sign-out fa-fw" title="Logout" /></Link>                   
+              </li>
+            </ul> 
+
+          </div>
+        </nav>
+      </div>
     );    
   }
 }

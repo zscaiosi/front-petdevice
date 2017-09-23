@@ -117,54 +117,78 @@ class StepThreeForm extends Component {
 
   render(){
     return(
-      <Row>
-        <Col md={12}>
-          <InputField inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="number" min={1} name="frequencia_diaria" value={this.state.frequencia_diaria} fieldName="Frequência Diária" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="number" min={100} name="qtde_racao" value={this.state.qtde_racao} fieldName="Quantidade por Porção (g)" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="date" name="data_inicio" value={this.state.data_inicio} fieldName="Data Início" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="date" name="data_fim" value={this.state.data_fim} fieldName="Data Fim" onChange={event => this.handleInputChange(event)} />
-          <InputField inputType="select" name="horarios" selectData={
-              [
-                "00:00:00", "09:00:00", "09:15:00", "09:30:00", "09:45:00",
-                "10:00:00", "10:15:00", "10:30:00",
-                "10:45:00", "11:00:00", "11:15:00", "11:30:00", "11:45:00", "12:00:00",
-                "12:15:00", "12:30:00", "12:45:00", "13:00:00", "13:15:00", "13:30:00", "13:45:00",
-                "15:00:00", "15:15:00", "15:30:00", "16:00:00", "16:15:00", "16:30:00", "16:45:00",
-                "17:15:00", "17:30:00", "17:45:00", "18:00:00", "18:15:00", "18:30:00", "19:00:00",
-                "19:15:00", "19:30:00", "20:00:00"
-              ]
-            }
-            fieldName="Horários" onChange={event => this.handleInputChange(event)} />
-            <p style={{color: 'red'}}>*Ao mudar os horários, eles são adicionados.</p>
-          <HorariosDiv>
-            { this.state.horarios.map( (horario, index) => {
-              return(
-                <HorariosRow key={index} >
-                  <b> {horario} </b> <p onClick={(e) => {
-                    //Função de excluir
-                        let currentHorarios = this.state.horarios.filter( (filteredHorario) => {
-                          return filteredHorario !== horario
-                        });
+      <div className="row">
+      <div className="col-md-8 col-md-offset-2">
+        <div className="login-panel panel panel-default">
+          <div className="panel-heading">
+            <h2 className="panel-title"><strong>Informações da Dieta</strong></h2>
+          </div>
+          <div className="panel-body">
+            <form role="form" onSubmit={(e) => e.preventDefault()}>
+              <fieldset>
+                <div className="form-group">
+                  <InputField inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
+                </div>
+                <div className="form-group">
+                  <InputField inputType="number" min={1} name="frequencia_diaria" value={this.state.frequencia_diaria} fieldName="Frequência Diária" onChange={event => this.handleInputChange(event)} />
+                </div>
+                <div className="form-group">
+                  <InputField inputType="number" min={100} name="qtde_racao" value={this.state.qtde_racao} fieldName="Quantidade por Porção (g)" onChange={event => this.handleInputChange(event)} />
+                </div>
+                <div className="form-group">
+                  <InputField inputType="date" name="data_inicio" value={this.state.data_inicio} fieldName="Data Início" onChange={event => this.handleInputChange(event)} />
+                </div>
+                <div className="form-group">
+                  <InputField inputType="date" name="data_fim" value={this.state.data_fim} fieldName="Data Fim" onChange={event => this.handleInputChange(event)} />
+                </div>
+                <div className="form-group">
+                  <InputField inputType="select" name="horarios" selectData={
+                    [
+                      "00:00:00", "09:00:00", "09:15:00", "09:30:00", "09:45:00",
+                      "10:00:00", "10:15:00", "10:30:00",
+                      "10:45:00", "11:00:00", "11:15:00", "11:30:00", "11:45:00", "12:00:00",
+                      "12:15:00", "12:30:00", "12:45:00", "13:00:00", "13:15:00", "13:30:00", "13:45:00",
+                      "15:00:00", "15:15:00", "15:30:00", "16:00:00", "16:15:00", "16:30:00", "16:45:00",
+                      "17:15:00", "17:30:00", "17:45:00", "18:00:00", "18:15:00", "18:30:00", "19:00:00",
+                      "19:15:00", "19:30:00", "20:00:00"
+                    ]
+                  }
+                  fieldName="Horários" onChange={event => this.handleInputChange(event)} />                
+                </div>
+                <div className="form-group">
+                  <HorariosDiv>
+                    { this.state.horarios.map( (horario, index) => {
+                      return(
+                        <HorariosRow key={index} >
+                          <b> {horario} </b> <p onClick={(e) => {
+                            //Função de excluir
+                                let currentHorarios = this.state.horarios.filter( (filteredHorario) => {
+                                  return filteredHorario !== horario
+                                });
 
-                        console.log("currentHorarios", currentHorarios);
+                                console.log("currentHorarios", currentHorarios);
 
-                        this.setState({
-                          horarios: currentHorarios
-                        }, () => console.log(this.state));
-                    //---FIM DA FUNÇÃO----
-                  }} > x </p>
-                </HorariosRow>
-              )
-            }) }
-          </HorariosDiv>
-          <Row>
-            <Col md={12} style={{ display: 'flex', flexDirection: 'column' }} >
-              <Button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</Button>                
-            </Col>         
-          </Row>          
-        </Col>
-      </Row>
+                                this.setState({
+                                  horarios: currentHorarios
+                                }, () => console.log(this.state));
+                            //---FIM DA FUNÇÃO----
+                          }} > x </p>
+                        </HorariosRow>
+                      )
+                    }) }
+                  </HorariosDiv>                
+                </div>     
+
+                <p style={{color: 'red'}}>*Ao mudar os horários, eles são adicionados.</p>                      
+                <span style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+                  <Button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</Button><br/>             
+                </span>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>               
     );
   }
 

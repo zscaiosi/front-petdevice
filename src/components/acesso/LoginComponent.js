@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {postLoginRequest, getUserRequest} from '../../actions/loginActions';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import logo from './styles/logo.png';
 
 const DivContainer = styled.div`
   display: flex;
@@ -109,7 +109,7 @@ class Login extends Component {
 
     if( this.props.isPostingLogin === true && nextProps.postLoginError !== null ){
       this.setState({
-        errorMessage: nextProps.postLoginError.response.data.response
+        errorMessage: nextProps.postLoginError ? nextProps.postLoginError.response.data.response : "ERROR!"
       });
     }
   }
@@ -138,32 +138,50 @@ class Login extends Component {
   }
 
   render(){
+    console.log("PROPS E STATE", this.props, this.state);
     return(
-
-        <Row bsClass="row centered-row" >
-
-          <Col md={6}>
-            <form onSubmit={event => event.preventDefault()} className="mt-5">
-              <div className="form-group">
-                <label htmlFor='login' >Login:</label>
-                <input className="form-control" id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
+      <div className="container">
+        {/* LOGO */}
+        <div className="row">
+          <div className="col-md-12">
+            <div className="panel-body">
+              <div style={{ display: "flex", flexDirection: 'row', justifyContent: 'center' }}>
+                <img alt="logo petdevice" src={logo}/>
               </div>
-              <div className="form-group">
-                <label htmlFor='login' >Senha:</label>
-                <input className="form-control" id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
+            </div>	
+          </div>          
+        </div>
+        {/* FORMULÁRIO */}
+        <div className="row">
+          <div className="col-md-4 col-md-offset-4">
+            <div className="login-panel panel panel-default">
+              <div className="panel-heading">
+                <h2 className="panel-title"><strong>Digite seus Dados de Login</strong></h2>
               </div>
-              <ActionsColumnSection>
-                <button className="btn btn-default" style={{ cursor: 'pointer' }} onClick={this.handleSubmit} type="submit">{ this.props.isPostingLogin ? "Aguarde..." : "Entrar" }</button>
+              <div className="panel-body">
+                <form role="form" onSubmit={(e) => e.preventDefault()}>
+                  <fieldset>
+                    <div className="form-group">
+                      <input className="form-control" placeholder="E-mail" id="login" name="login" type='text' value={this.state.login} onChange={event => this.handleInputChange(event)} />
+                    </div>
+                    <div className="form-group">
+                      <input className="form-control" placeholder="password" id="password" name="pswd" type='password' value={this.state.pswd} onChange={event => this.handleInputChange(event)} />
+                    </div>
 
-                <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
-          
-                {this.state.errorMessage !== "" ? <BadMessageArticle> E-mail ou senha incorretos. </BadMessageArticle> : null}
-              </ActionsColumnSection>
-            </form>
-            { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }
-          </Col>
+                    {/* Change this to a button or input when using this as a form */}
+                    <button className="btn btn-default" style={{ cursor: 'pointer' }} onClick={this.handleSubmit} type="submit">{ this.props.isPostingLogin ? "Aguarde..." : "Entrar" }</button>
 
-        </Row>
+                    <Link to="/cadastrar" style={{ textAlign: 'center' }} > Cadastrar </Link>
+      
+                    {this.state.errorMessage !== "" ? <BadMessageArticle> E-mail ou senha incorretos. </BadMessageArticle> : null}                  
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        { this.props.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : null }
+      </div>
  
     );
   }

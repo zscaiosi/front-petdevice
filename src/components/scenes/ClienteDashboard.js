@@ -31,106 +31,164 @@ class ClienteDashboard extends Component {
 
 	render() {
 		return (
-			<Col md={12}>
-				<Row >
-					<Panel header="Informações" bsClass="panel" bsStyle="primary">
-						<Row>
-							<span className=" centered-span-row col-md-6" >
-								<Col md={6}>
-									<Row>
-										<b>Nome:</b>
-									</Row>
-									<Row>
-										<b>E-mail:</b>
-									</Row>
-									<Row>
-										<b>Sexo:</b>
-									</Row>
-									<Row>
-										<b>CPF:</b>
-									</Row>
-									<Row>
-										<b>Nascimento:</b>
-									</Row>
-									<Row>
-										<b>Logradouro:</b>
-									</Row>
-									<Row>
-										<b>Número:</b>
-									</Row	>
-									<Row>
-										<b>Complemento:</b>
-									</Row>
-									<Row>
-										<b>Bairro:</b>
-									</Row>
-									<Row>
-										<b>CEP:</b>
-									</Row>
-									<Row>
-										<b>Cidade:</b>
-									</Row>							
-									<Row>
-										<b>Estado:</b>
-									</Row>
-									<Row>
-										<b><Link to="/home/device" style={{ color: 'white' }} >Device:</Link></b>
-									</Row>
-								</Col>						
-							</span>
-							<span className=" centered-span-row col-md-6" >
-								<Col md={6}>
+			<div id="page-wrapper">
+				
+				<div className="row">
+					<div className="col-lg-12">
+						<h1 className="page-header">Olá { this.props.getUserSuccess !== null ? this.props.getUserSuccess.data.nome : "Buscando..." }</h1>
+						<h4 className="">Veja suas informações abaixo:</h4>
+					</div>			
+				</div>
 
-									{
-										this.props.getUserSuccess !== null ?
-											Object.keys(this.props.getUserSuccess.data).map((k, i) => {
-												if (k !== "psw" && k !== "username" && k !== "device" && k !== "_id") {
-													return (
-														<Row key={k + i} >
-															<b> {this.props.getUserSuccess.data[k]} </b>
-														</Row>
-													);
-												}
-											}) : null
-									}
-
-								</Col>
-							</span>							
-						</Row>
-						<Row bsClass="row centered-row" >
-							<Link style={{textDecoration: "none", color: "white"}} to="/home/update/clientes"><button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} >Alterar</button></Link>
-						</Row>
-					</Panel>
-				</Row>
-
-				{/*FIM DO ROW COM INFOS DOS CLIENTES*/}
-				<Row bsClass="row centered-row">
-					<Col md={6}>
-					  <Row bsClass="row centered-row" >
-							<Col md={12}>
-								<Link to="/home/pet">
-									<Button bsStyle="primary full-button" >
-										PET
-									</Button>
-								</Link>	
-							</Col>					
-						</Row>
-					</Col>
-					<Col md={6}>
-						<Row bsClass="row centered-row" >
-							<Col md={12}>
-								<Link to="/home/dieta">
-									<Button bsStyle="primary full-button" >
-										DIETA
-									</Button>
-								</Link>	
-							</Col>					
-						</Row>
-					</Col>
-				</Row>
-				{/* FIM DO ROW NAV */}
-			</Col>
-		);
+				<div className="row">
+					<div className="col-lg-8">
+						<div className="panel panel-default">
+							<div className="panel-heading">
+								Informações
+							</div>
+							<div className="panel-body">
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>Nome</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.nome
+											:
+												null
+										}									
+									</div>
+								</div>
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>E-mail</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.email
+											:
+												null
+										}									
+									</div>
+								</div>
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>Sexo</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.sexo
+											:
+												null
+										}									
+									</div>
+								</div>
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>CPF</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.cpf
+											:
+												null
+										}									
+									</div>
+								</div>
+								<div className="row show-grid">
+									<div className="col-md-4"><strong style={{width: '100%'}} >Data de Nascimento</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.dtNascimento
+											:
+												null
+										}									
+									</div>
+								</div>
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>Logradouro</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.logradouro
+											:
+												null
+										}									
+									</div>
+								</div>		
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>Número</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.numero
+											:
+												null
+										}									
+									</div>
+								</div>	
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>Complemento</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.complemento
+											:
+												null
+										}									
+									</div>
+								</div>	
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>Bairro</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.bairro
+											:
+												null
+										}									
+									</div>
+								</div>	
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>CEP</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.cep
+											:
+												null
+										}
+									</div>
+								</div>	
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>Cidade</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.cidade
+											:
+												null
+										}									
+									</div>
+								</div>	
+								<div className="row show-grid">
+									<div className="col-md-4"><strong>Estado</strong></div>
+									<div className="col-md-8">
+										{
+											this.props.getUserSuccess !== null ?
+												this.props.getUserSuccess.data.estado
+											:
+												null
+										}									
+									</div>
+								</div>
+									
+							</div>													
+						</div>
+						<div style={{marginBottom: 10}} >
+							<a href="edit_gerenciador_usuario.html"> <button type="button" className="btn btn-warning">Alterar</button> </a>												
+						</div>
+					</div>
+				</div>
+			</div>
+		);					
 	}
 }
 

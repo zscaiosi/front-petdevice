@@ -4,30 +4,20 @@ import Login from './components/acesso/LoginComponent';
 import CadastroWraper from './components/acesso/CadastroComponent';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Header from './components/header/HeaderComponent';
 import Home from './components/scenes/HomeScene';
-import { Grid, Row, Col, Well } from 'react-bootstrap';
 
 class Base extends Component {
 
 	render() {
 		return (
-			<Grid fluid>
+			<span>
 				{localStorage.getItem("login") === null ? <Redirect to="/" /> : (JSON.parse(localStorage.getItem("login")).login.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : <Redirect to="/" />)}
-				<Well bsSize="large">
-					<Row bsClass="show-grid">
-						<Route path="/home" component={Header} />
-					</Row>
-					<Row bsClass="show-grid centered-row">
-						<Switch>
-							<Route exact path="/" component={Login} />
-							<Route path="/cadastrar" component={CadastroWraper} />
-							<Route path="/home" component={Home} />
-						</Switch>
-					</Row>					
-				</Well>
-			</Grid>
-
+				<Switch>
+					<Route exact path="/" component={Login} />
+					<Route path="/cadastrar" component={CadastroWraper} />
+					<Route path="/home" component={Home} />
+				</Switch>				
+			</span>
 		)
 		// return (
 		// 	<div id="base-container" >

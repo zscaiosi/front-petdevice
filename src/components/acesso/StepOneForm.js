@@ -136,41 +136,73 @@ class StepOneForm extends Component {
     this.setState({
       isPosting: true
     }, () => {
-      this.postClienteRequest();      
+      this.postClienteRequest();
     })
   }
 
   render(){
     return(
-      <Row>
-        <Col md={12} >
-          <div className="row" >
-            <div className="col-md-12">
-              <InputField inputType="text" name="nome" value={this.state.formDataClient.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="text" name="email" value={this.state.formDataClient.email} maxLength="75" fieldName="E-mail" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="password" name="psw" value={this.state.formDataClient.psw} maxLength="135" fieldName="Senha" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="radio" name="sexo" radioOptions={["masculino", "feminino"]} value={this.state.formDataClient.sexo} fieldName="Sexo" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="text" name="cpf" value={this.state.formDataClient.cpf} maxLength="11" fieldName="CPF" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="date" name="dtNascimento" value={this.state.formDataClient.dtNascimento} fieldName="Data de Nascimento" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="text" name="logradouro" value={this.state.formDataClient.logradouro} fieldName="Logradouro" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="number" name="numero" value={this.state.formDataClient.numero} fieldName="Número" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="text" name="complemento" value={this.state.formDataClient.complemento} fieldName="Complemento" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="text" name="bairro" value={this.state.formDataClient.bairro} maxLength="75" fieldName="Bairro" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="text" name="cep" value={this.state.formDataClient.cep} maxLength="10" fieldName="Cep" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="text" name="cidade" value={this.state.formDataClient.cidade} maxLength="35" fieldName="Cidade" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="select" name="estado" value={this.state.formDataClient.estado} selectData={["São Paulo", "Rio de Janeiro"]} fieldName="Estado" onChange={event => this.handleInputChange(event)} />
-              <InputField inputType="text" name="device" value={this.state.formDataDevice._id} maxLength="10" fieldName="Chave do Dispositivo" onChange={event => this.handleInputChange(event)} />
-
-              <Row>
-                <Col md={12} style={{ display: 'flex', flexDirection: 'column' }} >
-                  <Button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</Button>
-                  <Link style={{ textAlign: 'center' }} to="/" >Voltar</Link>                   
-                </Col>               
-              </Row>
+      <div className="row">
+        <div className="col-md-8 col-md-offset-2">
+          <div className="login-panel panel panel-default">
+            <div className="panel-heading">
+              <h2 className="panel-title"><strong>Informações de Usuário</strong></h2>
             </div>
-          </div>         
-        </Col>
-      </Row>
+            <div className="panel-body">
+              <form role="form" onSubmit={(e) => e.preventDefault()}>
+                <fieldset>
+                  <div className="form-group">
+                    <InputField inputType="text" name="nome" value={this.state.formDataClient.nome} maxLength="75" fieldName="Nome" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="text" name="email" value={this.state.formDataClient.email} maxLength="75" fieldName="E-mail" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="password" name="psw" value={this.state.formDataClient.psw} maxLength="135" fieldName="Senha" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="radio" name="sexo" radioOptions={["masculino", "feminino"]} value={this.state.formDataClient.sexo} fieldName="Sexo" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="text" name="cpf" value={this.state.formDataClient.cpf} maxLength="11" fieldName="CPF" onChange={event => this.handleInputChange(event)} />
+                  </div>                
+                  <div className="form-group">
+                    <InputField inputType="date" name="dtNascimento" value={this.state.formDataClient.dtNascimento} fieldName="Data de Nascimento" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="text" name="logradouro" value={this.state.formDataClient.logradouro} fieldName="Logradouro" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="number" name="numero" value={this.state.formDataClient.numero} fieldName="Número" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="text" name="complemento" value={this.state.formDataClient.complemento} fieldName="Complemento" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="text" name="bairro" value={this.state.formDataClient.bairro} maxLength="75" fieldName="Bairro" onChange={event => this.handleInputChange(event)} />
+                  </div> 
+                  <div className="form-group">
+                    <InputField inputType="text" name="cep" value={this.state.formDataClient.cep} maxLength="10" fieldName="Cep" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="text" name="cidade" value={this.state.formDataClient.cidade} maxLength="35" fieldName="Cidade" onChange={event => this.handleInputChange(event)} />
+                  </div> 
+                  <div className="form-group">
+                    <InputField inputType="select" name="estado" value={this.state.formDataClient.estado} selectData={["São Paulo", "Rio de Janeiro"]} fieldName="Estado" onChange={event => this.handleInputChange(event)} />
+                  </div>
+                  <div className="form-group">
+                    <InputField inputType="text" name="device" value={this.state.formDataDevice._id} maxLength="10" fieldName="Chave do Dispositivo" onChange={event => this.handleInputChange(event)} />
+                  </div>                                                                                                                
+                  <span style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+                    <Button onClick={event => this.handleSubmit(event)} type="submit" name="submit-btn">Cadastrar</Button><br/>
+                    <Link style={{ textAlign: 'center' }} to="/" >Voltar</Link>                  
+                  </span>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>      
     );
   }
 //
