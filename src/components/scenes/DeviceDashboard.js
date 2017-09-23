@@ -103,10 +103,7 @@ class DeviceDashboard extends Component {
                           ? this.props.getDeviceSuccess.data.atividades.map( (atividade, index) => {
                             return(
                               <div className="row show-grid">
-                                <div className="col-md-1"><strong>Data</strong></div>
-                                <div className="col-md-3">
-                                  
-                                </div>
+
                                 <div className="col-md-1"><strong>Horário</strong></div>
                                 <div className="col-md-3">
                                   { atividade.horario }
@@ -120,10 +117,7 @@ class DeviceDashboard extends Component {
                           })
                         :
                           <div className="row show-grid">
-                            <div className="col-md-1"><strong>Data</strong></div>
-                            <div className="col-md-3">
-                              NENHUMA
-                            </div>
+
                             <div className="col-md-1"><strong>Horário</strong></div>
                             <div className="col-md-3">
                               NENHUM
