@@ -182,8 +182,8 @@ class ClienteDashboard extends Component {
 									
 							</div>													
 						</div>
-						<div style={{marginBottom: 10}} >
-							<a href="edit_gerenciador_usuario.html"> <button type="button" className="btn btn-warning">Alterar</button> </a>												
+						<div >
+							<button className="btn btn-warning" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/clientes">Alterar</Link></button>												
 						</div>
 					</div>
 				</div>

@@ -8,9 +8,9 @@ import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { loadState, saveState } from './localStorage';
-import './style/index.css';
 import './style/bootstrap.css';
 import './style/font-awesome/css/font-awesome.min.css';
+import './style/index.css';
 
 const persistingState = loadState();
 
@@ -26,7 +26,7 @@ store.subscribe( () => {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <div className="container">
+      <div className="container-fluid">
           <Route path="/" component={Base} />
       </div>
     </BrowserRouter>

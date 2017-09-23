@@ -10,14 +10,14 @@ class Base extends Component {
 
 	render() {
 		return (
-			<span>
+			<div className="col-md-12">
 				{localStorage.getItem("login") === null ? <Redirect to="/" /> : (JSON.parse(localStorage.getItem("login")).login.postLoginSuccess !== null ? <Redirect to="/home/cliente" /> : <Redirect to="/" />)}
 				<Switch>
 					<Route exact path="/" component={Login} />
 					<Route path="/cadastrar" component={CadastroWraper} />
 					<Route path="/home" component={Home} />
 				</Switch>				
-			</span>
+			</div>
 		)
 		// return (
 		// 	<div id="base-container" >

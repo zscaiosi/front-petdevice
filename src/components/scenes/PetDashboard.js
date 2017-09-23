@@ -29,55 +29,51 @@ class PetDashboard extends Component {
 
   render() {
     return (
-      <Row>
-        <Col md={12}>
-          <Row>
-          <Panel header="Informações" bsClass="panel" bsStyle="primary">
-            <Col md={6}>
-              <Row>
-                <b>Nome:</b>
-              </Row>
-              <Row>
-                <b>Raça:</b>
-              </Row>
-              <Row>
-                <b>Porte:</b>
-              </Row>
-              <Row>
-                <b>Pedigree:</b>
-              </Row> 
-              <Row>
-                <b>Especie:</b>
-              </Row>
-              <Row>
-                <b>Idade:</b>
-              </Row>                                                                     
-            </Col>
-            <Col md={6}>
+			<div id="page-wrapper">
+				<div className="row">
+          <div className="col-lg-8">
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                Informações
+              </div>
               {
-                this.props.getPetSuccess !== null && this.props.getPetSuccess.data !== null ? Object.keys(this.props.getPetSuccess.data).map( (key, index) => {
-                  return(
-                    (index > 0 && index < 7) ?
-                    <Row key={index+"/"+key}>
-                      <b> {this.props.getPetSuccess.data[key]} </b>
-                    </Row>
-                    :
-                    null
-                  )
-                })
+                this.props.getPetSuccess !== null ?
+                  <div className="panel-body">
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Nome</strong></div>
+                      <div className="col-md-8">{ this.props.getPetSuccess.data.nome }</div>
+                    </div>
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Raça</strong></div>
+                      <div className="col-md-8">{ this.props.getPetSuccess.data.raca }</div>
+                    </div>
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Porte</strong></div>
+                      <div className="col-md-8">{ this.props.getPetSuccess.data.porte }</div>
+                    </div>
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Pedigree</strong></div>
+                      <div className="col-md-8">{ this.props.getPetSuccess.data.pedigree }</div>
+                    </div>
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Especie</strong></div>
+                      <div className="col-md-8">{ this.props.getPetSuccess.data.especie }</div>
+                    </div>
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Idade</strong></div>
+                      <div className="col-md-8">{ this.props.getPetSuccess.data.idade }</div>
+                    </div>							
+                  </div>
                 :
-                <Row>
-                  <p>Carregando... </p>
-                </Row>
+                  "Carregando..."
               }
-            </Col>
-						<Row bsClass="row centered-row" >
-							<Link style={{textDecoration: "none", color: "white"}} to="/home/update/pets"><button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} >Alterar</button></Link>
-						</Row>            
-          </Panel> 
-          </Row>         
-        </Col>        
-      </Row>
+            </div>
+            <div>
+              <button className="btn btn-warning" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/pets">Alterar</Link></button>											
+            </div>
+          </div>
+				</div>
+			</div>
     );
   }
 }

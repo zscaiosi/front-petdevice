@@ -48,12 +48,12 @@ class Home extends Component {
 
   render(){
     return(
-      <span>
+      <div className="row">
         <div className="row">
           <Header />
         </div>
         <div className="row">
-          <div className="col-md-4" style={{padding: '0px'}} >
+          <div className="col-md-2 full-navbar" style={{padding: '0px'}} >
             <SideBar />
           </div>
           <div className="col-md-8">
@@ -67,7 +67,7 @@ class Home extends Component {
           </div>          
         </div>        
         {/* CONTEÚDOS */}         
-      </span>
+      </div>
     );
   }
 }

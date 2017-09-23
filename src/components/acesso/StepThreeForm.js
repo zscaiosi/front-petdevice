@@ -127,22 +127,22 @@ class StepThreeForm extends Component {
             <form role="form" onSubmit={(e) => e.preventDefault()}>
               <fieldset>
                 <div className="form-group">
-                  <InputField inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
+                  <InputField styleClass="form-control" inputType="text" name="descricao" value={this.state.descricao} maxLength="75" fieldName="Descrição" onChange={event => this.handleInputChange(event)} />
                 </div>
                 <div className="form-group">
-                  <InputField inputType="number" min={1} name="frequencia_diaria" value={this.state.frequencia_diaria} fieldName="Frequência Diária" onChange={event => this.handleInputChange(event)} />
+                  <InputField styleClass="form-control" inputType="number" min={1} name="frequencia_diaria" value={this.state.frequencia_diaria} fieldName="Frequência Diária" onChange={event => this.handleInputChange(event)} />
                 </div>
                 <div className="form-group">
-                  <InputField inputType="number" min={100} name="qtde_racao" value={this.state.qtde_racao} fieldName="Quantidade por Porção (g)" onChange={event => this.handleInputChange(event)} />
+                  <InputField styleClass="form-control" inputType="number" min={100} name="qtde_racao" value={this.state.qtde_racao} fieldName="Quantidade por Porção (g)" onChange={event => this.handleInputChange(event)} />
                 </div>
                 <div className="form-group">
-                  <InputField inputType="date" name="data_inicio" value={this.state.data_inicio} fieldName="Data Início" onChange={event => this.handleInputChange(event)} />
+                  <InputField styleClass="form-control" inputType="date" name="data_inicio" value={this.state.data_inicio} fieldName="Data Início" onChange={event => this.handleInputChange(event)} />
                 </div>
                 <div className="form-group">
-                  <InputField inputType="date" name="data_fim" value={this.state.data_fim} fieldName="Data Fim" onChange={event => this.handleInputChange(event)} />
+                  <InputField styleClass="form-control" inputType="date" name="data_fim" value={this.state.data_fim} fieldName="Data Fim" onChange={event => this.handleInputChange(event)} />
                 </div>
                 <div className="form-group">
-                  <InputField inputType="select" name="horarios" selectData={
+                  <InputField styleClass="form-control" inputType="select" name="horarios" selectData={
                     [
                       "00:00:00", "09:00:00", "09:15:00", "09:30:00", "09:45:00",
                       "10:00:00", "10:15:00", "10:30:00",

@@ -21,69 +21,63 @@ class DietDashboard extends Component {
 
   render(){
     return(
-      <Col md={12}>
-				<Row >
-          <Panel header="Informações" bsClass="panel" bsStyle="primary">
-            <Row>
-              <span className=" centered-span-row col-md-6" >
-                <Col md={6}>
-                  <Row>
-                    <b>Descrição:</b>
-                  </Row>
-                  <Row>
-                    <b>Frequência Diária:</b>
-                  </Row>
-                  <Row>
-                    <b>Data Início:</b>
-                  </Row>
-                  <Row>
-                    <b>Data Fim:</b>
-                  </Row>
-                  <Row>
-                    <b>Quantidade por porção:</b>
-                  </Row>
-                  <Row>
-                    <b>Horários:</b>
-                  </Row>                                                                                                    
-                </Col>
-              </span>
-              <span className=" centered-span-row col-md-6" >
-                <Col md={6}>
-                  {
-                    this.props.getDietSuccess !== null && this.props.getDietSuccess.data !== null ?
-                      Object.keys(this.props.getDietSuccess.data).map( (k, i) => {
-                        if( i >= 1 && i < 6 ){
-                          return(
-                            <Row key={k+i}>
-                              { this.props.getDietSuccess.data[k] === "" ? <b>"---"</b> : <b>{this.props.getDietSuccess.data[k]}</b> }
-                            </Row>
-                          );
-                        }else if( i === 7 ){
-                          return(
-                            <Row key={k+i}>
-                              { this.props.getDietSuccess.data["horarios"].map( (horario, index) => {
-                                return (        
-                                  <Row key={horario+index}>
-                                    <b>{horario}</b>
-                                  </Row>
-                                );
-                              }) }
-                            </Row>
-                          );
+
+      <div id="page-wrapper">
+
+        <div className="row">
+          {
+            this.props.getDietSuccess !== null ?
+              <div className="col-lg-8">
+                <div className="panel panel-default">
+                  <div className="panel-heading">
+                    Informações
+                  </div>
+                  <div className="panel-body">
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Descrição</strong></div>
+                      <div className="col-md-8">{ this.props.getDietSuccess.data.descricao }</div>
+                    </div>
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Frequência Diária</strong></div>
+                      <div className="col-md-8">{ this.props.getDietSuccess.data.frequencia_diaria }</div>
+                    </div>
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Data Início</strong></div>
+                      <div className="col-md-8">{ this.props.getDietSuccess.data.data_inicio }</div>
+                    </div>
+                    <div className="row show-grid">
+                      <div className="col-md-4"><strong>Data Fim</strong></div>
+                      <div className="col-md-8">{ this.props.getDietSuccess.data.data_fim }</div>
+                    </div>
+                    <div className="row show-grid" style={{borderBottom: 'solid 1px'}}>
+                      <div className="col-md-4" ><strong>Quantidade por porção</strong></div>
+                      <div className="col-md-8" >{ this.props.getDietSuccess.data.qtde_racao }</div>
+                    </div>
+                    <div className="row show-grid" style={{marginTop: '10px'}}>
+                      <div className="col-md-4"><strong>Horários</strong></div>
+                      <div className="col-md-8">
+                        {
+                          this.props.getDietSuccess.data.horarios.map( (horario, index) => {
+                            return(
+                              <span key={index}>
+                                <b>{horario}</b> <br/>
+                              </span>
+                            );
+                          })
                         }
-                      })
-                    :
-                    this.props.getDietSuccess !== null && this.props.getDietSuccess.response === "ok" && this.props.getDietSuccess.data === null ? <p>Clique em "Alterar" para cadastrar uma dieta!</p> : <p>Aguarde...</p>
-                  }
-                </Col>
-              </span>
-            </Row>
-            <Row bsClass="centered-row">
-              <button className="btn btn-danger" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/dietas">Alterar</Link></button>  
-            </Row>
-          </Panel>     
-        </Row>
-      </Col>
+                      </div>
+                    </div>							
+                  </div>													
+                </div>
+                <div>
+                  <button className="btn btn-warning" type="button" style={{ cursor: 'pointer' }} ><Link style={{textDecoration: "none", color: "white"}} to="/home/update/dietas">Alterar</Link></button>																								
+                </div>
+              </div>   
+            :
+              null                     
+          }
+        </div>
+      </div> 
     );
   }
 }
